@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>القرآن الكريم</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Tahoma, sans-serif;
+    background: #f5f1e8;
+    color: #222;
+}
+
+header {
+    background: #174d3b;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+header p {
+    margin: 8px 0 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 15px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+}
+
+input,
+select,
+button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 8px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+button {
+    background: #174d3b;
+    color: white;
+    border: none;
+}
+
+button:active {
+    opacity: .8;
+}
+
+.surahs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.surah {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.surah:hover {
+    background: #edf4f0;
+}
+
+.reader {
+    display: none;
+}
+
+.ayah {
+    font-size: 23px;
+    line-height: 2.2;
+    padding: 12px 4px;
+    border-bottom: 1px solid #eee;
+}
+
+.number {
+    color: #777;
+    font-size: 15px;
+}
+
+.navigation {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.back {
+    background: #555;
+}
+
+.status {
+    text-align: center;
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 10px;
+    background: #f1f1f1;
+}
+
+audio {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.hidden {
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>📖 القرآن الكريم</h1>
+    <p>قراءة واستماع للقرآن الكريم</p>
+</header>
+
+<div class="container">
+
+    <div id="surahPage" class="card">
+
+        <h2>📚 سور القرآن الكريم</h2>
+
+        <input
+            id="search"
+            type="text"
+            placeholder="🔎 ابحث عن سورة..."
+        >
+
+        <div id="surahs" class="surahs"></div>
+
+    </div>
+
+
+    <div id="readerPage" class="card reader">
+
+        <button class="back" onclick="showSurahs()">
+            ↩ العودة إلى السور
+        </button>
+
+        <h2 id="surahTitle"></h2>
+
+        <div>
+            👤 القارئ:
+            <b>عبدالباسط عبدالصمد</b>
+        </div>
+
+        <audio id="audio" controls></audio>
+
+        <div id="status" class="status">
+            جاري تحميل السورة...
+        </div>
+
+        <div id="ayahs"></div>
+
+        <div class="navigation">
+
+            <button onclick="previousSurah()">
+                ◀ السورة السابقة
+            </button>
+
+            <button onclick="nextSurah()">
+                السورة التالية ▶
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const surahs = [
+"الفاتحة","البقرة","آل عمران","النساء","المائدة",
+"الأنعام","الأعراف","الأنفال","التوبة","يونس",
+"هود","يوسف","الرعد","إبراهيم","الحجر",
+"النحل","الإسراء","الكهف","مريم","طه",
+"الأنبياء","الحج","المؤمنون","النور","الفرقان",
+"الشعراء","النمل","القصص","العنكبوت","الروم",
+"لقمان","السجدة","الأحزاب","سبأ","فاطر",
+"يس","الصافات","ص","الزمر","غافر",
+"فصلت","الشورى","الزخرف","الدخان","الجاثية",
+"الأحقاف","محمد","الفتح","الحجرات","ق",
+"الذاريات","الطور","النجم","القمر","الرحمن",
+"الواقعة","الحديد","المجادلة","الحشر","الممتحنة",
+"الصف","الجمعة","المنافقون","التغابن","الطلاق",
+"التحريم","الملك","القلم","الحاقة","المعارج",
+"نوح","الجن","المزمل","المدثر","القيامة",
+"الإنسان","المرسلات","النبأ","النازعات","عبس",
+"التكوير","الانفطار","المطففين","الانشقاق","البروج",
+"الطارق","الأعلى","الغاشية","الفجر","البلد",
+"الشمس","الليل","الضحى","الشرح","التين",
+"العلق","القدر","البينة","الزلزلة","العاديات",
+"القارعة","التكاثر","العصر","الهمزة","الفيل",
+"قريش","الماعون","الكوثر","الكافرون","النصر",
+"المسد","الإخلاص","الفلق","الناس"
+];
+
+
+let currentSurah = 1;
+
+
+function showSurahs() {
+
+    document.getElementById("surahPage").style.display = "block";
+    document.getElementById("readerPage").style.display = "none";
+
+}
+
+
+function renderSurahs() {
+
+    const searchText =
+        document.getElementById("search").value.trim();
+
+    const container =
+        document.getElementById("surahs");
+
+    container.innerHTML = "";
+
+    surahs.forEach(function(name, index) {
+
+        if (
+            searchText === "" ||
+            name.includes(searchText)
+        ) {
+
+            const div =
+                document.createElement("div");
+
+            div.className = "surah";
+
+            div.innerHTML =
+                "📖 " +
+                (index + 1) +
+                "<br><b>" +
+                name +
+                "</b>";
+
+            div.onclick = function() {
+                openSurah(index + 1);
+            };
+
+            container.appendChild(div);
+        }
+
+    });
+
+}
+
+
+async function openSurah(number) {
+
+    currentSurah = number;
+
+    document.getElementById("surahPage")
+        .style.display = "none";
+
+    document.getElementById("readerPage")
+        .style.display = "block";
+
+    document.getElementById("surahTitle")
+        .textContent =
+        "سورة " + surahs[number - 1];
+
+    document.getElementById("ayahs")
+        .innerHTML = "";
+
+    document.getElementById("status")
+        .textContent =
+        "⏳ جاري تحميل نص السورة...";
+
+
+    /*
+       نص القرآن
+    */
+
+    try {
+
+        const response =
+            await fetch(
+                "https://api.alquran.cloud/v1/surah/" +
+                number +
+                "/quran-uthmani"
+            );
+
+        const data =
+            await response.json();
+
+        if (data.code !== 200) {
+            throw new Error();
+        }
+
+        const ayahs =
+            data.data.ayahs;
+
+        const container =
+            document.getElementById("ayahs");
+
+        ayahs.forEach(function(ayah) {
+
+            const div =
+                document.createElement("div");
+
+            div.className = "ayah";
+
+            div.innerHTML =
+                ayah.text +
+                ' <span class="number">﴿' +
+                ayah.numberInSurah +
+                "﴾</span>";
+
+            container.appendChild(div);
+
+        });
+
+        document.getElementById("status")
+            .textContent =
+            "✅ تم تحميل السورة";
+
+    }
+
+    catch (error) {
+
+        document.getElementById("status")
+            .textContent =
+            "❌ تعذر تحميل نص السورة";
+
+    }
+
+
+    /*
+       تلاوة عبدالباسط عبدالصمد
+    */
+
+    const audio =
+        document.getElementById("audio");
+
+    audio.src =
+        "https://server7.mp3quran.net/basit/" +
+        String(number).padStart(3, "0") +
+        ".mp3";
+
+    audio.load();
+
+}
+
+
+function previousSurah() {
+
+    if (currentSurah > 1) {
+        openSurah(currentSurah - 1);
+    }
+
+}
+
+
+function nextSurah() {
+
+    if (currentSurah < 114) {
+        openSurah(currentSurah + 1);
+    }
+
+}
+
+
+document
+    .getElementById("search")
+    .addEventListener(
+        "input",
+        renderSurahs
+    );
+
+
+renderSurahs();
+
+</script>
+
+</body>
+</html>

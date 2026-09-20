@@ -1,0 +1,12 @@
+{
+  "name": "القرآن الكريم",
+  "short_name": "القرآن",
+  "description": "موقع القرآن الكريم للقراءة والاستماع",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#071c17",
+  "theme_color": "#071f18",
+  "dir": "rtl",
+  "lang": "ar",
+  "orientation": "portrait"
+}
