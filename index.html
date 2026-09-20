@@ -14,64 +14,13 @@
 
 <style>
 /* تحسين الوضع النهاري */
-body.light{
-    background:
-        radial-gradient(circle at 20% 10%,rgba(155,120,56,.08),transparent 30%),
-        radial-gradient(circle at 80% 20%,rgba(57,113,93,.10),transparent 35%),
-        linear-gradient(135deg,var(--bg),var(--bg2));
-    color:var(--text);
-}
 
-body.light .header{
-    background:rgba(255,253,247,.96);
-    color:var(--text);
-}
 
-body.light .logo,
-body.light .section-title,
-body.light .hero h1,
-body.light .hero-title,
-body.light .reader-title,
-body.light .surah-name,
-body.light .ayah-text{
-    color:var(--text);
-}
 
-body.light .icon-btn,
-body.light .search-input,
-body.light select,
-body.light .surah-card,
-body.light .menu-card,
-body.light .reader,
-body.light .reader-content,
-body.light .settings-card{
-    background:var(--card);
-    color:var(--text);
-    border-color:var(--border);
-}
 
-body.light .muted,
-body.light .subtitle,
-body.light .surah-info,
-body.light .ayah-number,
-body.light .description{
-    color:var(--muted);
-}
 
-body.light button{
-    color:var(--text);
-}
 
-body.light .primary-btn,
-body.light .start-btn{
-    background:linear-gradient(135deg,var(--green),var(--green2));
-    color:#fff;
-}
 
-body.light .gold,
-body.light .gold-text{
-    color:var(--gold2);
-}
 :root{
     --bg:#071c17;
     --bg2:#0d2922;
@@ -107,20 +56,6 @@ body{
     font-family:"Cairo",sans-serif;
 }
 
-body.light{
-    --bg:#dfe8df;
-    --bg2:#cbdacb;
-    --card:#edf3eb;
-    --card2:#e2ece1;
-    --green:#315f4d;
-    --green2:#46755f;
-    --gold:#8b6a2e;
-    --gold2:#6f531f;
-    --text:#24382f;
-    --muted:#596960;
-    --border:rgba(49,95,77,.22);
-    --shadow:0 12px 35px rgba(40,60,48,.16);
-}
 
 button,
 input,
@@ -146,9 +81,6 @@ button{
     border-bottom:1px solid var(--border);
 }
 
-body.light .header{
-    background:rgba(255,255,255,.94);
-}
 
 .logo{
     color:var(--gold2);
@@ -477,9 +409,6 @@ main{
     transition:.3s;
 }
 
-body.light .reader-header{
-    background:rgba(255,255,255,.96);
-}
 
 .reader-header.hidden{
     transform:translateY(-130%);
@@ -916,158 +845,40 @@ footer{
     }
 }
 /* إصلاح الخلفيات البيضاء في الوضع النهاري */
-body.light .hero,
-body.light .hero-section,
-body.light .menu-card,
-body.light .surah-card,
-body.light .search-box,
-body.light .reader,
-body.light .reader-content,
-body.light .settings-card,
-body.light .modal-content{
-    background-color:var(--card) !important;
-}
 
-body.light .header{
-    background:rgba(238,233,220,.97) !important;
-}
 
-body.light .reader-header{
-    background:rgba(238,233,220,.97) !important;
-}
 
-body.light input,
-body.light select{
-    background:var(--card) !important;
-    color:var(--text) !important;
-}
 
-body.light .icon-btn{
-    background:rgba(49,95,77,.08) !important;
-    color:var(--text) !important;
-}
 
-body.light .ayah{
-    background:transparent !important;
-    color:var(--text) !important;
-}
 /* ===== إصلاح الوضع النهاري بالكامل ===== */
 
-body.light{
-    background:#d7e3d8 !important;
-    color:#24382f !important;
-}
 
 /* إزالة أي طبقة بيضاء فوق الصفحة */
-body.light::before,
-body.light::after{
-    background:transparent !important;
-    opacity:1 !important;
-}
 
 /* الواجهة الرئيسية */
-body.light .hero{
-    background:linear-gradient(
-        145deg,
-        #d7e3d8,
-        #c7d8ca
-    ) !important;
-    color:#24382f !important;
-}
 
 /* البطاقات */
-body.light .menu-card,
-body.light .surah-card,
-body.light .card,
-body.light .search-box,
-body.light .reader,
-body.light .reader-content,
-body.light .settings-card{
-    background:#edf3ed !important;
-    color:#24382f !important;
-}
 
 /* العناوين والنصوص */
-body.light h1,
-body.light h2,
-body.light h3,
-body.light p,
-body.light span,
-body.light label,
-body.light .hero-title,
-body.light .hero-subtitle,
-body.light .section-title,
-body.light .surah-name,
-body.light .ayah-text{
-    color:#24382f;
-}
 
 /* النصوص الثانوية */
-body.light .muted,
-body.light .subtitle,
-body.light .description,
-body.light .surah-info{
-    color:#596b61 !important;
-}
 
 /* شريط الموقع */
-body.light .header,
-body.light .reader-header{
-    background:#dce7dd !important;
-    color:#24382f !important;
-}
 
 /* حقول البحث والقوائم */
-body.light input,
-body.light select{
-    background:#edf3ed !important;
-    color:#24382f !important;
-    border-color:rgba(49,95,77,.28) !important;
-}
 
 /* الأزرار */
-body.light .icon-btn{
-    background:#c9d9cc !important;
-    color:#24382f !important;
-}
 
 /* منطقة الآيات */
-body.light .ayah{
-    background:transparent !important;
-    color:#24382f !important;
-}
 
 /* النوافذ المنبثقة */
-body.light .modal,
-body.light .modal-content{
-    background:#edf3ed !important;
-    color:#24382f !important;
-}
 
 /* الحدود */
-body.light .menu-card,
-body.light .surah-card,
-body.light .search-box,
-body.light .reader{
-    border-color:rgba(49,95,77,.22) !important;
-}
 
 /* ===== الإصلاح النهائي لألوان المقدمة في الوضع النهاري ===== */
 
-body.light .heroVerse{
-    color: var(--gold2) !important;
-    text-shadow: none !important;
-}
 
-body.light .dedication{
-    color: var(--muted) !important;
-    text-shadow: none !important;
-}
 
-body.light .bismillah{
-    color: var(--gold2) !important;
-    text-shadow: none !important;
-}
 
 </style>
 </head>
@@ -1080,7 +891,6 @@ body.light .bismillah{
     <div class="header-actions">
         <button class="icon-btn" onclick="showSection('home-menu')" title="الرئيسية">⌂</button>
         <button class="icon-btn" onclick="showFavorites()" title="المفضلة">⭐</button>
-        <button class="icon-btn" onclick="toggleDarkMode()" title="الوضع الليلي">☾</button>
     </div>
 </header>
 
@@ -1453,7 +1263,7 @@ document.addEventListener("DOMContentLoaded",function(){
         currentReciter;
 
     updateContinueBox();
-    loadDarkMode();
+
 
     const base =
         location.href.split("#")[0];
@@ -2574,50 +2384,6 @@ function continueReading(){
 
 }
 
-function toggleDarkMode(){
-
-    const isLight = !document.body.classList.contains("light");
-
-    if(isLight){
-        document.body.classList.add("light");
-        localStorage.setItem("quranLightMode","1");
-    }else{
-        document.body.classList.remove("light");
-        localStorage.setItem("quranLightMode","0");
-    }
-
-    updateThemeButton();
-}
-
-function updateThemeButton(){
-
-    const buttons = document.querySelectorAll('[onclick="toggleDarkMode()"]');
-
-    buttons.forEach(function(button){
-
-        if(document.body.classList.contains("light")){
-            button.textContent = "☀";
-            button.title = "الوضع الليلي";
-        }else{
-            button.textContent = "☾";
-            button.title = "الوضع النهاري";
-        }
-
-    });
-}
-
-function loadDarkMode(){
-
-    const savedMode = localStorage.getItem("quranLightMode");
-
-    if(savedMode === "1"){
-        document.body.classList.add("light");
-    }else{
-        document.body.classList.remove("light");
-    }
-
-    updateThemeButton();
-}
 
 function showToast(message){
 
