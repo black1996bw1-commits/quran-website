@@ -7,6 +7,11 @@
 
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#071f18">
+<meta name="application-name" content="الإيمان">
+<meta name="apple-mobile-web-app-title" content="الإيمان">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -880,6 +885,17 @@ footer{
 
 
 
+
+/* زر تثبيت تطبيق الإيمان */
+.install-btn{
+    display:none;
+}
+.install-btn.show{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+}
+
 </style>
 </head>
 
@@ -889,6 +905,9 @@ footer{
     <div class="logo">☾ القرآن الكريم</div>
 
     <div class="header-actions">
+
+<button class="icon-btn install-btn" id="installBtn" title="تثبيت تطبيق الإيمان" aria-label="تثبيت تطبيق الإيمان">⇩</button>
+
         <button class="icon-btn" onclick="showSection('home-menu')" title="الرئيسية">⌂</button>
         <button class="icon-btn" onclick="showFavorites()" title="المفضلة">⭐</button>
     </div>
@@ -2417,6 +2436,53 @@ if ("serviceWorker" in navigator) {
             });
     });
 }
+</script>
+
+
+<script>
+/* تثبيت موقع الإيمان كتطبيق */
+let deferredInstallPrompt = null;
+
+window.addEventListener("beforeinstallprompt", function(event){
+    event.preventDefault();
+    deferredInstallPrompt = event;
+
+    const installBtn = document.getElementById("installBtn");
+    if(installBtn){
+        installBtn.classList.add("show");
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function(){
+    const installBtn = document.getElementById("installBtn");
+
+    if(!installBtn) return;
+
+    installBtn.addEventListener("click", async function(){
+        if(!deferredInstallPrompt){
+            showToast("يمكنك تثبيت التطبيق من قائمة المتصفح");
+            return;
+        }
+
+        deferredInstallPrompt.prompt();
+
+        try{
+            await deferredInstallPrompt.userChoice;
+        }catch(error){}
+
+        deferredInstallPrompt = null;
+        installBtn.classList.remove("show");
+    });
+});
+
+window.addEventListener("appinstalled", function(){
+    deferredInstallPrompt = null;
+
+    const installBtn = document.getElementById("installBtn");
+    if(installBtn){
+        installBtn.classList.remove("show");
+    }
+});
 </script>
 
 </body>
