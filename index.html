@@ -849,42 +849,7 @@ footer{
         font-size:22px;
     }
 }
-/* إصلاح الخلفيات البيضاء في الوضع النهاري */
-
-
-
-
-
-/* ===== إصلاح الوضع النهاري بالكامل ===== */
-
-
-/* إزالة أي طبقة بيضاء فوق الصفحة */
-
-/* الواجهة الرئيسية */
-
-/* البطاقات */
-
-/* العناوين والنصوص */
-
-/* النصوص الثانوية */
-
-/* شريط الموقع */
-
-/* حقول البحث والقوائم */
-
-/* الأزرار */
-
-/* منطقة الآيات */
-
-/* النوافذ المنبثقة */
-
-/* الحدود */
-
-/* ===== الإصلاح النهائي لألوان المقدمة في الوضع النهاري ===== */
-
-
-
-
+/* الوضع الليلي فقط */
 
 /* زر تثبيت تطبيق الإيمان */
 .install-btn{
@@ -896,6 +861,9 @@ footer{
     justify-content:center;
 }
 
+
+.content-card{margin:0 auto 18px;max-width:900px;padding:22px;border:1px solid var(--border);border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015)),var(--card);box-shadow:var(--shadow)}
+.wide-input{width:100%;box-sizing:border-box;margin:10px 0 15px;padding:13px 15px;border-radius:13px;border:1px solid var(--border);background:var(--bg2);color:var(--text);outline:none}.progress-card{margin-top:18px;padding:16px;border-radius:16px;background:rgba(215,187,121,.055);border:1px solid rgba(215,187,121,.16);line-height:2}.progress-bar{height:10px;margin:12px 0;border-radius:20px;overflow:hidden;background:rgba(255,255,255,.1)}.progress-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--green2),var(--gold))}.adhkar-item{margin:12px 0;padding:18px;border:1px solid var(--border);border-radius:18px;background:rgba(255,255,255,.025)}.adhkar-item .dhikr-text{font-family:"Amiri",serif;font-size:24px;line-height:2.15}.adhkar-item .dhikr-meta{color:var(--muted);font-size:13px;margin-top:8px}.dhikr-counter{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:14px}.dhikr-counter button{min-width:44px;height:44px;border:1px solid var(--gold);border-radius:12px;background:var(--green);color:#fff;font-weight:bold}.dhikr-count{min-width:55px;text-align:center;color:var(--gold2);font-size:20px;font-weight:bold}.asma-card{min-height:125px;display:flex;flex-direction:column;align-items:center;justify-content:center}.asma-number{color:var(--muted);font-size:12px}.asma-name{font-family:"Amiri",serif;font-size:25px;color:var(--gold2)}.download-status{margin-top:12px;color:var(--muted);line-height:1.9}
 </style>
 </head>
 
@@ -923,8 +891,7 @@ footer{
     </div>
 
     <div class="dedication">
-        هذا الموقع صدقة عن والدي، أسأل الله تعالى أن يتقبلها
-        ويجعلها في ميزان حسناتهما.
+        هذا التطبيق صدقة عن والدي، أسأل الله تعالى أن يتقبلها ويجعلها في ميزان حسناتهما.
     </div>
 
     <div class="hero-buttons">
@@ -940,7 +907,7 @@ footer{
 
     <div class="menu-grid">
 
-        <button class="menu-card" onclick="showSection('reading')">
+        <button class="menu-card" onclick="openReadingHome()">
             <span class="emoji">📖</span>
             <h3>قراءة القرآن الكريم</h3>
             <p>قراءة سور القرآن الكريم بالخط العثماني</p>
@@ -957,6 +924,12 @@ footer{
             <h3>البحث في القرآن الكريم</h3>
             <p>ابحث عن السورة التي تريدها بسرعة</p>
         </button>
+
+        <button class="menu-card" onclick="showSection('adhkar')"><span class="emoji">🤲</span><h3>الأذكار</h3><p>الصباح والمساء وأذكار النوم</p></button>
+        <button class="menu-card" onclick="showSection('hifz')"><span class="emoji">🧠</span><h3>حفظ القرآن الكريم</h3><p>خطة حفظ ومراجعة مع حفظ التقدم</p></button>
+        <button class="menu-card" onclick="showSection('khatma')"><span class="emoji">📅</span><h3>خطة ختم القرآن</h3><p>ورد يومي محسوب حسب مدة الختمة</p></button>
+        <button class="menu-card" onclick="showSection('asma')"><span class="emoji">🕋</span><h3>أسماء الله الحسنى</h3><p>99 اسمًا ومعانيها بطريقة تفاعلية</p></button>
+        <button class="menu-card" onclick="showOfflineManager()"><span class="emoji">📥</span><h3>المحتوى دون إنترنت</h3><p>تثبيت القرآن وإدارة التلاوات المحفوظة</p></button>
 
     </div>
 
@@ -1039,6 +1012,35 @@ footer{
 
 </section>
 
+<section class="section" id="adhkar">
+<h2 class="section-title">🤲 الأذكار</h2>
+<div class="menu-grid">
+<button class="menu-card" onclick="openAdhkar('morning')"><span class="emoji">🌅</span><h3>أذكار الصباح</h3><p>ورد الصباح مع عداد التقدم</p></button>
+<button class="menu-card" onclick="openAdhkar('evening')"><span class="emoji">🌇</span><h3>أذكار المساء</h3><p>ورد المساء مع عداد التقدم</p></button>
+<button class="menu-card" onclick="openAdhkar('sleep')"><span class="emoji">🌙</span><h3>أذكار النوم</h3><p>أذكار ما قبل النوم</p></button>
+</div><div id="adhkarContent" class="content-card"></div>
+</section>
+<section class="section" id="hifz">
+<h2 class="section-title">🧠 حفظ القرآن الكريم</h2>
+<div class="content-card"><p>أنشئ خطة يومية وسيُحفظ تقدمك على الجهاز.</p>
+<label>عدد الآيات الجديدة يوميًا</label><input id="hifzDaily" type="number" min="1" max="50" value="5" class="wide-input">
+<button class="main-btn primary" onclick="saveHifzPlan()">حفظ الخطة</button><div id="hifzProgress" class="progress-card"></div></div>
+</section>
+<section class="section" id="khatma">
+<h2 class="section-title">📅 خطة ختم القرآن</h2>
+<div class="content-card"><label>أريد ختم القرآن خلال</label>
+<select id="khatmaDays" class="wide-input"><option value="7">7 أيام</option><option value="10">10 أيام</option><option value="15">15 يومًا</option><option value="30" selected>30 يومًا</option><option value="40">40 يومًا</option><option value="60">60 يومًا</option><option value="90">90 يومًا</option></select>
+<button class="main-btn primary" onclick="createKhatmaPlan()">إنشاء الخطة</button><div id="khatmaResult" class="progress-card"></div></div>
+</section>
+<section class="section" id="asma">
+<h2 class="section-title">🕋 أسماء الله الحسنى</h2><div class="surah-grid" id="asmaGrid"></div>
+<div id="asmaMeaning" class="content-card"><p>اضغط على أي اسم لمعرفة معناه.</p></div>
+</section>
+<section class="section" id="offline">
+<h2 class="section-title">📥 المحتوى دون إنترنت</h2>
+<div class="content-card"><h3>القرآن المقروء</h3><p>تثبيت نص القرآن كاملًا للقراءة دون اتصال.</p><button class="main-btn primary" onclick="prepareOfflineQuran()">تثبيت القرآن المقروء</button><div id="offlineQuranStatus" class="download-status"></div></div>
+<div class="content-card"><h3>تلاوة عبدالباسط عبدالصمد</h3><p>تنزيل السورة الحالية للاستماع إليها دون اتصال.</p><button class="main-btn primary" onclick="downloadBasitSurah(currentSurah)">تنزيل السورة الحالية</button><button class="utility-btn" onclick="clearOfflineAudio()">حذف التلاوات المحفوظة</button><div id="offlineAudioStatus" class="download-status"></div></div>
+</section>
 <section class="section" id="reader">
 
     <div class="reader">
@@ -1159,6 +1161,7 @@ footer{
     <div style="margin-top:7px">صدقة عن الوالدين</div>
 </footer>
 
+<div class="modal" id="continueReadingModal"><div class="modal-box"><button class="modal-close" onclick="closeContinuePrompt()">×</button><div class="tafsir-title">📖 متابعة القراءة</div><div id="continuePromptText" class="modal-ayah" style="text-align:center"></div><div class="modal-actions"><button onclick="resumeSavedReading()">نعم، متابعة القراءة</button><button onclick="chooseSurahAfterPrompt()">لا، اختيار سورة</button></div></div></div>
 <div class="modal" id="tafsirModal">
 
     <div class="modal-box">
@@ -1449,27 +1452,11 @@ function selectSurah(number){
 }
 
 function showSection(id){
-
-    if(id === currentSection){
-
-        renderSection(id);
-
-        return;
-    }
-
-    sectionHistory.push(id);
-
-    currentSection = id;
-
-    history.pushState(
-        {
-            section:id,
-            app:true
-        },
-        "",
-        "#" + id
-    );
-
+    if(id === "reading" && currentSection !== "reader"){ openReadingHome(); return; }
+    if(id === "offline"){ showOfflineManager(); return; }
+    if(id === currentSection){ renderSection(id); return; }
+    sectionHistory.push(id); currentSection=id;
+    history.pushState({section:id,app:true},"","#"+id);
     renderSection(id);
 }
 
@@ -1507,7 +1494,7 @@ function renderSection(id){
 
     window.scrollTo({
         top:0,
-        behavior:"instant"
+        behavior:"auto"
     });
 
 }
@@ -1676,7 +1663,19 @@ async function openSurah(
 
         });
 
-        saveLastReading();
+        // لا تستبدل موضع القراءة المحفوظ عند استئناف القراءة؛
+        // نحفظ الموضع الحالي فقط عند فتح سورة جديدة أو عند عدم وجود موضع محفوظ لهذه السورة.
+        const savedReadingBeforeRender = JSON.parse(localStorage.getItem("lastReading") || "null");
+        const hasExactSavedPosition = !!(
+            restoreLast &&
+            currentMode === "reading" &&
+            savedReadingBeforeRender &&
+            Number(savedReadingBeforeRender.surah) === number &&
+            Number.isFinite(Number(savedReadingBeforeRender.scroll))
+        );
+        if(!hasExactSavedPosition){
+            saveLastReading();
+        }
 
         setTimeout(function(){
 
@@ -1719,14 +1718,14 @@ async function openSurah(
 
                     window.scrollTo({
                         top:saved.scroll,
-                        behavior:"instant"
+                        behavior:"auto"
                     });
 
                 }else{
 
                     window.scrollTo({
                         top:0,
-                        behavior:"instant"
+                        behavior:"auto"
                     });
 
                 }
@@ -1735,7 +1734,7 @@ async function openSurah(
 
                 window.scrollTo({
                     top:0,
-                    behavior:"instant"
+                    behavior:"auto"
                 });
 
             }
@@ -2421,6 +2420,68 @@ function showToast(message){
     },2200);
 
 }
+
+
+const ADHKAR={morning:[
+["أصبحنا وأصبح الملك لله، والحمد لله، لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير.",1],
+["اللهم بك أصبحنا وبك أمسينا وبك نحيا وبك نموت وإليك النشور.",1],
+["رضيت بالله ربًا، وبالإسلام دينًا، وبمحمد صلى الله عليه وسلم نبيًا.",3],
+["آية الكرسي: الله لا إله إلا هو الحي القيوم، لا تأخذه سنة ولا نوم...",1],
+["قل هو الله أحد، وقل أعوذ برب الفلق، وقل أعوذ برب الناس.",3]],evening:[
+["أمسينا وأمسى الملك لله، والحمد لله، لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير.",1],
+["اللهم بك أمسينا وبك أصبحنا وبك نحيا وبك نموت وإليك المصير.",1],
+["رضيت بالله ربًا، وبالإسلام دينًا، وبمحمد صلى الله عليه وسلم نبيًا.",3],
+["آية الكرسي: الله لا إله إلا هو الحي القيوم، لا تأخذه سنة ولا نوم...",1],
+["أعوذ بكلمات الله التامات من شر ما خلق.",3]],sleep:[
+["باسمك اللهم أموت وأحيا.",1],["اللهم قني عذابك يوم تبعث عبادك.",3],
+["سبحان الله، والحمد لله، والله أكبر.",33],
+["اللهم أسلمت نفسي إليك، ووجهت وجهي إليك، وفوضت أمري إليك، وألجأت ظهري إليك، رغبة ورهبة إليك، لا ملجأ ولا منجا منك إلا إليك.",1],
+["آية الكرسي: الله لا إله إلا هو الحي القيوم، لا تأخذه سنة ولا نوم...",1],
+["قل هو الله أحد، وقل أعوذ برب الفلق، وقل أعوذ برب الناس.",3]]};
+
+const ASMA=[["الله","المعبود بحق، الجامع لصفات الكمال"],["الرحمن","واسع الرحمة لجميع الخلق"],["الرحيم","الذي يخص المؤمنين برحمته"],["الملك","مالك كل شيء والمتصرف فيه"],["القدوس","المنزه عن كل نقص"],["السلام","السالم من العيوب والمنقصات"],["المؤمن","الذي يؤمّن عباده ويصدق وعده"],["المهيمن","الرقيب الحافظ لكل شيء"],["العزيز","الغالب الذي لا يُغلب"],["الجبار","العالي القاهر، وجابر الكسير"],["المتكبر","المتعالي عن صفات الخلق"],["الخالق","موجد الأشياء من العدم"],["البارئ","الذي خلق الخلق على تقدير"],["المصور","الذي أعطى كل مخلوق صورته"],["الغفار","كثير المغفرة لذنوب عباده"],["القهار","الغالب لكل شيء"],["الوهاب","كثير العطاء بلا عوض"],["الرزاق","الذي يرزق جميع خلقه"],["الفتاح","الذي يفتح أبواب الخير"],["العليم","المحيط بكل شيء علمًا"],["القابض","الذي يقبض بحكمته"],["الباسط","الذي يبسط الرزق والرحمة"],["الخافض","الذي يخفض بحكمته"],["الرافع","الذي يرفع بفضله"],["المعز","الذي يمنح العزة"],["المذل","الذي يذل بعدله"],["السميع","الذي يسمع جميع الأصوات"],["البصير","الذي يرى جميع الأشياء"],["الحكم","الحاكم بالحق"],["العدل","المنزه عن الظلم"],["اللطيف","الرفيق بعباده"],["الخبير","العالم ببواطن الأمور"],["الحليم","الذي لا يعاجل بالعقوبة"],["العظيم","الموصوف بالعظمة والكمال"],["الغفور","الواسع المغفرة"],["الشكور","الذي يثيب على القليل بالكثير"],["العلي","المتعالي فوق خلقه"],["الكبير","العظيم الذي لا أعظم منه"],["الحفيظ","الحافظ لكل شيء"],["المقيت","المقتدر المقيت لعباده"],["الحسيب","الكافي لعباده والمحاسب لهم"],["الجليل","الموصوف بصفات الجلال"],["الكريم","كثير الخير والعطاء"],["الرقيب","المطلع على أحوال عباده"],["المجيب","الذي يجيب دعاء الداعين"],["الواسع","الواسع في علمه ورحمته"],["الحكيم","الذي يضع الأشياء مواضعها"],["الودود","المحب لعباده المؤمنين"],["المجيد","العظيم كثير المجد والكرم"],["الباعث","الذي يبعث الخلق"],["الشهيد","المطلع على كل شيء"],["الحق","الثابت الذي لا شك فيه"],["الوكيل","الكفيل بأمور عباده"],["القوي","كامل القوة"],["المتين","شديد القوة"],["الولي","ناصر عباده المؤمنين"],["الحميد","المستحق لجميع المحامد"],["المحصي","الذي أحصى كل شيء علمًا"],["المبدئ","الذي بدأ خلق الأشياء"],["المعيد","الذي يعيد الخلق"],["المحيي","الذي يهب الحياة"],["المميت","الذي يقدر الموت"],["الحي","الذي له الحياة الكاملة"],["القيوم","القائم بنفسه المقيم لغيره"],["الواجد","الغني الذي لا يعوزه شيء"],["الماجد","الكثير الإحسان والكرم"],["الواحد","المتفرد في ذاته وصفاته"],["الأحد","المنفرد الذي لا نظير له"],["الصمد","المقصود في الحوائج والغني عن الخلق"],["القادر","المتمكن من كل شيء"],["المقتدر","البالغ في القدرة غايتها"],["المقدم","الذي يقدم بحكمته"],["المؤخر","الذي يؤخر بحكمته"],["الأول","ليس قبله شيء"],["الآخر","ليس بعده شيء"],["الظاهر","الذي ليس فوقه شيء"],["الباطن","الذي ليس دونه شيء"],["الوالي","مالك الأشياء والمتصرف فيها"],["المتعالي","المنزه عن صفات النقص"],["البر","الكثير الإحسان واللطف"],["التواب","كثير قبول التوبة"],["المنتقم","الذي يعاقب بعدله"],["العفو","الذي يمحو السيئات"],["الرؤوف","شديد الرحمة واللطف"],["مالك الملك","المتصرف في الملك كله"],["ذو الجلال والإكرام","صاحب العظمة والكرم"],["المقسط","العادل المنصف"],["الجامع","الذي يجمع الخلق للحساب"],["الغني","المستغني عن جميع خلقه"],["المغني","الذي يغني من يشاء"],["المانع","الذي يمنع بحكمته"],["الضار","الذي يقدر الضر بحكمته"],["النافع","الذي يقدر النفع بفضله"],["النور","الهادي والمنور للقلوب"],["الهادي","الذي يهدي إلى الحق"],["البديع","المبدع الذي لا مثيل لخلقه"],["الباقي","الدائم الذي لا يفنى"],["الوارث","الباقي بعد فناء الخلق"],["الرشيد","الذي يرشد عباده"],["الصبور","الذي لا يعاجل بالعقوبة"]];
+
+function openReadingHome(){const x=JSON.parse(localStorage.getItem("lastReading")||"null");if(x&&x.surah){document.getElementById("continuePromptText").textContent="توقفت عند سورة "+SURAHS[Number(x.surah)-1][0]+"، هل تريد متابعة القراءة من حيث توقفت؟";document.getElementById("continueReadingModal").classList.add("show")}else{showSectionDirect("reading")}}
+function closeContinuePrompt(){document.getElementById("continueReadingModal").classList.remove("show")}
+function resumeSavedReading(){const x=JSON.parse(localStorage.getItem("lastReading")||"null");closeContinuePrompt();if(x){currentMode="reading";openSurah(Number(x.surah),true)}}
+function chooseSurahAfterPrompt(){closeContinuePrompt();showSectionDirect("reading")}
+function showSectionDirect(id){sectionHistory.push(id);currentSection=id;history.pushState({section:id,app:true},"","#"+id);renderSection(id)}
+
+function openAdhkar(type){
+    const list=ADHKAR[type];
+    const title={morning:"🌅 أذكار الصباح",evening:"🌇 أذكار المساء",sleep:"🌙 أذكار النوم"}[type];
+    const key="adhkar-"+type;
+    const save=JSON.parse(localStorage.getItem(key)||"{}");
+    const html=list.map((x,i)=>{
+        const c=Math.min(Number(save[i]||0),x[1]);
+        return `<div class="adhkar-item">
+            <div class="dhikr-text">${x[0]}</div>
+            <div class="dhikr-meta">التكرار: ${x[1]}</div>
+            <div class="dhikr-counter">
+                <button onclick="incrementDhikr('${type}',${i},${x[1]})">✓</button>
+                <span class="dhikr-count" id="dhikr-${type}-${i}">${c} / ${x[1]}</span>
+                <button onclick="resetDhikr('${type}',${i})">↺</button>
+            </div>
+        </div>`;
+    }).join("");
+    document.getElementById("adhkarContent").innerHTML=`<div class="content-card"><h3 style="text-align:center;color:var(--gold2);font-family:Amiri,serif;font-size:28px">${title}</h3>${html}</div>`;
+}
+function incrementDhikr(t,i,max){let k="adhkar-"+t,a=JSON.parse(localStorage.getItem(k)||"{}");a[i]=Math.min(Number(a[i]||0)+1,max);localStorage.setItem(k,JSON.stringify(a));let e=document.getElementById("dhikr-"+t+"-"+i);if(e)e.textContent=a[i]+" / "+max}
+function resetDhikr(t,i){let k="adhkar-"+t,a=JSON.parse(localStorage.getItem(k)||"{}");a[i]=0;localStorage.setItem(k,JSON.stringify(a));let e=document.getElementById("dhikr-"+t+"-"+i);if(e)e.textContent="0 / "+ADHKAR[t][i][1]}
+
+function renderAsma(){let g=document.getElementById("asmaGrid");if(g)g.innerHTML=ASMA.map((x,i)=>'<button class="surah-card asma-card" onclick="showAsma('+i+')"><span class="asma-number">'+(i+1)+'</span><span class="asma-name">'+x[0]+'</span></button>').join("")}
+function showAsma(i){let x=ASMA[i];document.getElementById("asmaMeaning").innerHTML='<h3 style="color:var(--gold2);font-family:Amiri,serif;font-size:30px">'+x[0]+'</h3><p style="line-height:2;font-size:17px">'+x[1]+'</p>'}
+function saveHifzPlan(){let d=Math.max(1,Math.min(50,Number(document.getElementById("hifzDaily").value)||5));localStorage.setItem("hifzPlan",JSON.stringify({daily:d,start:Date.now(),done:0}));renderHifz()}
+function renderHifz(){let b=document.getElementById("hifzProgress"),p=JSON.parse(localStorage.getItem("hifzPlan")||"null");if(!b)return;if(!p){b.innerHTML="<p>لم تُنشئ خطة بعد.</p>";return}let pct=Math.min(100,Math.round((p.done/6236)*100));b.innerHTML="<b>التقدم: "+pct+"%</b><div class='progress-bar'><div class='progress-fill' style='width:"+pct+"%'></div></div><p>الورد اليومي: "+p.daily+" آيات — المنجز: "+p.done+" آية.</p><button class='utility-btn' onclick='advanceHifz()'>تم إنجاز ورد اليوم</button>"}
+function advanceHifz(){let p=JSON.parse(localStorage.getItem("hifzPlan")||"null");if(!p)return;p.done=Math.min(6236,p.done+p.daily);localStorage.setItem("hifzPlan",JSON.stringify(p));renderHifz()}
+function createKhatmaPlan(){let d=Number(document.getElementById("khatmaDays").value)||30,pg=Math.ceil(604/d);localStorage.setItem("khatmaPlan",JSON.stringify({days:d,pages:pg}));document.getElementById("khatmaResult").innerHTML="<b>وردك اليومي</b><p>حوالي <strong>"+pg+" صفحات</strong> يوميًا لإتمام 604 صفحات خلال "+d+" يومًا.</p>"}
+
+async function showOfflineManager(){showSectionDirect("offline");let b=document.getElementById("offlineQuranStatus");if(b&&localStorage.getItem("offline-quran-ready")==="1")b.textContent="✅ القرآن المقروء مثبت على الجهاز."}
+async function prepareOfflineQuran(){let b=document.getElementById("offlineQuranStatus");if(!b)return;if(!("caches"in window)){b.textContent="❌ المتصفح لا يدعم التخزين المحلي.";return}b.textContent="⏳ جاري تثبيت القرآن...";let c=await caches.open("quran-text-v1"),done=0;for(let i=1;i<=114;i++){let u="/offline/quran/surah/"+i+".json";if(await c.match(u)){done++;continue}try{let r=await fetch("https://api.alquran.cloud/v1/surah/"+i+"/quran-uthmani",{cache:"no-store"});if(!r.ok)throw 0;let j=await r.json();await c.put(u,new Response(JSON.stringify(j),{headers:{"Content-Type":"application/json"}}));done++;b.textContent="⏳ تم تثبيت "+done+" / 114 سورة"}catch(e){b.textContent="⚠️ تم تثبيت "+done+" سورة. أعد المحاولة عند توفر الاتصال.";return}}localStorage.setItem("offline-quran-ready","1");b.textContent="✅ القرآن المقروء كاملًا مثبت ويعمل دون اتصال."}
+async function downloadBasitSurah(n){let b=document.getElementById("offlineAudioStatus");if(!b)return;try{let c=await caches.open("quran-audio-basit-v1"),u=servers.basit+String(n).padStart(3,"0")+".mp3";b.textContent="⏳ جاري التنزيل...";let r=await fetch(u);if(!r.ok)throw 0;await c.put(u,r.clone());b.textContent="✅ تم حفظ التلاوة دون اتصال."}catch(e){b.textContent="⚠️ تعذر التنزيل."}}
+async function clearOfflineAudio(){await caches.delete("quran-audio-basit-v1");document.getElementById("offlineAudioStatus").textContent="تم حذف التلاوات المحفوظة."}
+
+document.addEventListener("DOMContentLoaded",function(){renderAsma();renderHifz()});
 
 </script>
 
