@@ -1,4 +1,4 @@
-const CACHE_NAME = 'al-iman-v26-back-fixed';
+const CACHE_NAME = 'al-iman-v28-back-navigation-fixed';
 const APP_SHELL = [
   "./",
   "./index.html",

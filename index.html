@@ -1704,36 +1704,23 @@ document.addEventListener("DOMContentLoaded",function(){
         }
     });
 
-    window.addEventListener("scroll",function(){
-
-        if(currentSection !== "reader") return;
-
-        clearTimeout(scrollTimer);
-
-        scrollTimer = setTimeout(function(){
-
-            if(currentMode === "reading"){
-
-                localStorage.setItem(
-                    "lastReading",
-                    JSON.stringify({
-                        surah:currentSurah,
-                        scroll:window.scrollY
-                    })
-                );
-
-                updateContinueBox();
-            }
-
-        },300);
-    });
+    // يتم حفظ موضع القراءة في النظام الموحد الموجود أسفل الصفحة.
+    // لا نستخدم مستمع حفظ آخر هنا حتى لا يتنافس مع الاستعادة ويعيد الموضع إلى الصفر.
 
     window.addEventListener("popstate",function(){
+        // إذا كانت نافذة الخروج مفتوحة، فزر الرجوع يلغي النافذة فقط
+        // ولا يسمح للمتصفح بالخروج من التطبيق بالخطأ.
+        const exitOverlay = document.getElementById("exitPrayerOverlay");
+        if(exitOverlay && exitOverlay.classList.contains("show")){
+            cancelExitPrayer();
+            return;
+        }
+
         if(allowLeave){
             return;
         }
 
-        // الرجوع داخل التطبيق: خطوة واحدة فقط إلى القسم السابق.
+        // الرجوع داخل التطبيق: زر الرجوع يعود خطوة واحدة فقط.
         if(sectionHistory.length > 1){
             sectionHistory.pop();
             const previous = sectionHistory[sectionHistory.length - 1] || "home-menu";
@@ -1741,18 +1728,17 @@ document.addEventListener("DOMContentLoaded",function(){
             currentMode = previous === "listening" ? "listening" : currentMode;
             renderSection(previous);
 
-            // ثبّت الشاشة في موضع القسم السابق بدل أن يعيد المتصفح
-            // موضع التمرير القديم من سجل الصفحة.
             requestAnimationFrame(function(){
                 window.scrollTo(0, 0);
             });
             return;
         }
 
-        // نحن الآن في القائمة الرئيسية: الضغطة الأولى تنبيه،
-        // والضغطة الثانية تفتح رسالة الخروج.
+        // في الصفحة الرئيسية: ضغطتان متتاليتان خلال 1800ms
+        // تفتحان رسالة الخروج. الضغطة الأولى تبقي المستخدم داخل التطبيق.
         const now = Date.now();
         if(now - lastBackTime < 1800){
+            lastBackTime = 0;
             showExitPrayer();
             return;
         }
@@ -1790,8 +1776,14 @@ function confirmExitPrayer(){
     const overlay=document.getElementById("exitPrayerOverlay");
     if(overlay)overlay.classList.remove("show");
     document.body.style.overflow="";
+    lastBackTime=0;
+
+    // السماح لهذه الرجعة الواحدة بالمرور حتى يخرج التطبيق
+    // من سجل المتصفح/PWA بدل اعتراضها مرة أخرى.
     allowLeave=true;
-    history.go(-1);
+    setTimeout(function(){
+        try{ history.back(); }catch(e){}
+    },60);
 }
 
 function renderSurahs(){
@@ -2283,33 +2275,63 @@ function updateContinueBox(){
     box.innerHTML = `📖 آخر قراءة لك كانت في <strong>سورة ${name}</strong><br><button class="utility-btn" style="margin-top:10px" onclick="continueReading()">متابعة القراءة</button>`;
 }
 
+function getCurrentReadingAyah(){
+    const list=document.querySelectorAll("#ayahList .ayah");
+    if(!list.length) return null;
+
+    // نحدد الآية التي بدأ المستخدم قراءتها فعليًا، بدل الاعتماد على
+    // scrollY وحده؛ لأن ارتفاع الخط/الشاشة قد يختلف عند العودة للتطبيق.
+    const marker=Math.max(80, Math.min(180, window.innerHeight * 0.22));
+    let current=list[0];
+
+    for(let i=0;i<list.length;i++){
+        const rect=list[i].getBoundingClientRect();
+        if(rect.top <= marker) current=list[i];
+        else break;
+    }
+
+    return Number(current.dataset.ayah) || 1;
+}
+
 function saveLastReading(){
-    if(currentMode !== "reading" || !currentSurah) return;
+    // مهم جدًا: لا تحفظ أثناء الانتقال بين الأقسام، لأن renderSection()
+    // يعيد scroll إلى الصفر، وهذا كان يمسح موضع القراءة المحفوظ.
+    if(currentSection !== "reader" || currentMode !== "reading" || !currentSurah) return;
+
     try{
+        const old=JSON.parse(localStorage.getItem("lastReading")||"null");
+        const ayah=getCurrentReadingAyah();
+        const scroll=Math.max(0,Math.round(window.scrollY||window.pageYOffset||0));
+
         localStorage.setItem("lastReading",JSON.stringify({
             surah:Number(currentSurah),
-            scroll:Math.max(0,Math.round(window.scrollY||window.pageYOffset||0)),
+            ayah:ayah || Number(old?.ayah) || 1,
+            scroll:scroll,
             savedAt:Date.now()
         }));
     }catch(e){}
+
     updateContinueBox();
 }
 
 let saveReadingTimer=null;
 window.addEventListener("scroll",function(){
-    if(currentMode !== "reading" || !currentSurah) return;
+    if(currentSection !== "reader" || currentMode !== "reading" || !currentSurah) return;
     clearTimeout(saveReadingTimer);
     saveReadingTimer=setTimeout(saveLastReading,250);
 },{passive:true});
 
 window.addEventListener("pagehide",function(){
-    if(currentMode === "reading") saveLastReading();
+    if(currentSection === "reader" && currentMode === "reading") saveLastReading();
 });
+
 function continueReading(){
-    const x=JSON.parse(localStorage.getItem("lastReading")||"null");
+    let x=null;
+    try{x=JSON.parse(localStorage.getItem("lastReading")||"null");}catch(e){x=null;}
+
     if(x&&Number(x.surah)>=1&&Number(x.surah)<=114){
         currentMode="reading";
-        openSurah(Number(x.surah),true);
+        openSurah(Number(x.surah),true,Number(x.ayah)||null);
     }else{
         showSection("reading");
     }
@@ -2494,9 +2516,14 @@ async function openSurah(
                 if(target){
 
                     target.scrollIntoView({
-                        behavior:"smooth",
+                        behavior:"instant",
                         block:"center"
                     });
+
+                    // ثبّت الموضع بعد الانتقال إلى الآية المحفوظة.
+                    setTimeout(function(){
+                        saveLastReading();
+                    },80);
 
                 }
 
@@ -3051,7 +3078,15 @@ const ASMA=[["الله","المعبود بحق، الجامع لصفات الك�
 
 function openReadingHome(){try{renderSurahs();}catch(e){} const x=JSON.parse(localStorage.getItem("lastReading")||"null");if(x&&x.surah){document.getElementById("continuePromptText").textContent="توقفت عند سورة "+SURAHS[Number(x.surah)-1][0]+"، هل تريد متابعة القراءة من حيث توقفت؟";document.getElementById("continueReadingModal").classList.add("show");document.body.style.overflow="hidden"}else{showSectionDirect("reading")}}
 function closeContinuePrompt(){document.getElementById("continueReadingModal").classList.remove("show");restoreBodyScrollIfNoModal()}
-function resumeSavedReading(){const x=JSON.parse(localStorage.getItem("lastReading")||"null");closeContinuePrompt();if(x){currentMode="reading";openSurah(Number(x.surah),true)}}
+function resumeSavedReading(){
+    let x=null;
+    try{x=JSON.parse(localStorage.getItem("lastReading")||"null");}catch(e){x=null;}
+    closeContinuePrompt();
+    if(x && Number(x.surah)>=1 && Number(x.surah)<=114){
+        currentMode="reading";
+        openSurah(Number(x.surah),true,Number(x.ayah)||null);
+    }
+}
 function chooseSurahAfterPrompt(){closeContinuePrompt();showSectionDirect("reading")}
 function showSectionDirect(id){sectionHistory.push(id);currentSection=id;history.pushState({section:id,app:true},"","#"+id);renderSection(id);requestAnimationFrame(function(){window.scrollTo(0,0);})}
 
