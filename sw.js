@@ -1,4 +1,4 @@
-const CACHE_NAME = 'al-iman-v24-source-fix';
+const CACHE_NAME = 'al-iman-v26-back-fixed';
 const APP_SHELL = [
   "./",
   "./index.html",

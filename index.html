@@ -553,6 +553,44 @@ main{
     display:block;
 }
 
+/* مشغل التلاوة — تصميم موحّد للهاتف والكمبيوتر */
+.audio-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    margin-bottom:14px;
+    text-align:right;
+}
+.audio-title-wrap{flex:1;min-width:0}
+.audio-kicker{color:var(--gold2);font-size:12px;font-weight:700;margin-bottom:4px}
+.audio-title{font-size:22px;font-weight:800;color:var(--text);line-height:1.35}
+.audio-reciter{font-size:13px;color:var(--muted);margin-top:4px}
+.audio-badge{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(215,187,121,.12);border:1px solid var(--gold);font-size:21px;flex:0 0 auto}
+.audio-select-row{margin:0 auto 12px;max-width:520px}
+.audio-progress-wrap{margin:12px auto 8px;max-width:680px}
+.audio-progress{width:100%;height:6px;accent-color:var(--gold);cursor:pointer}
+.audio-times{display:flex;justify-content:space-between;direction:ltr;color:var(--muted);font-size:12px;margin-top:5px}
+.audio-controls{display:flex;justify-content:center;align-items:center;gap:8px;direction:ltr;margin:10px 0 12px}
+.audio-control{width:44px;height:44px;border:1px solid var(--border);border-radius:12px;background:var(--bg2);color:var(--text);font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:none;padding:0}
+.audio-control.main{width:54px;height:54px;border-radius:50%;background:var(--gold);color:#17251b;border-color:var(--gold);font-size:21px}
+.audio-control:active,.audio-mini:active{transform:scale(.96)}
+.audio-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:4px}
+.audio-mini-actions{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.audio-mini{border:1px solid var(--border);border-radius:10px;background:var(--bg2);color:var(--text);padding:9px 11px;font-size:12px;cursor:pointer}
+.audio-mini.active{border-color:var(--gold);color:var(--gold2)}
+.audio-volume{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:13px;direction:ltr}
+.volume-range{width:105px;accent-color:var(--gold)}
+#audioPlayer{display:none}
+@media(max-width:600px){
+    .audio-box{padding:16px 12px;border-radius:18px}
+    .audio-title{font-size:19px}
+    .audio-control{width:40px;height:40px;font-size:16px}
+    .audio-control.main{width:50px;height:50px}
+    .audio-bottom{justify-content:center}
+    .audio-volume{width:100%;justify-content:center}
+}
+
 .reciter-select{
     width:100%;
     max-width:500px;
@@ -1561,17 +1599,16 @@ const SURAHS = [
 
 // مصادر التلاوات: CDN ثابت وموثوق، مع مصدر MP3Quran كخطة احتياطية.
 const audioEditions = {
-    basit:   {edition:"ar.abdulbasit",        bitrate:192, fallback:"https://server7.mp3quran.net/basit/"},
-    sudais:  {edition:"ar.sudais",            bitrate:192, fallback:"https://server11.mp3quran.net/sds/"},
-    husary:  {edition:"ar.husary",            bitrate:128, fallback:"https://server13.mp3quran.net/husr/"},
-    minshawi:{edition:"ar.minshawi",          bitrate:128, fallback:"https://server10.mp3quran.net/minsh/"},
-    ayoub:   {edition:"ar.muhammadayoub",     bitrate:128, fallback:"https://server8.mp3quran.net/ayyub/"},
-    ajmi:    {edition:"ar.ajamy",             bitrate:128, fallback:"https://server10.mp3quran.net/ajm/"},
-    // هذه الخيارات تبقى في الواجهة، ويجري جلب مصدرها الحقيقي من MP3Quran عند الحاجة.
-    dossari: {edition:"", bitrate:128, fallback:"https://server11.mp3quran.net/yasser/"},
-    ghamdi:  {edition:"", bitrate:128, fallback:"https://server7.mp3quran.net/s_gmd/"},
-    maher:   {edition:"", bitrate:128, fallback:"https://server12.mp3quran.net/maher/"},
-    shatri:  {edition:"", bitrate:128, fallback:"https://server11.mp3quran.net/shatri/"}
+    basit:   {edition:"ar.abdulbasit", bitrate:192, primary:"https://server7.mp3quran.net/basit/", secondary:"https://cdn.islamic.network/quran/audio-surah/192/ar.abdulbasit/", fallback:"https://server7.mp3quran.net/basit/"},
+    sudais:  {edition:"ar.sudais", bitrate:192, primary:"https://server11.mp3quran.net/sds/", secondary:"https://cdn.islamic.network/quran/audio-surah/192/ar.sudais/", fallback:"https://server11.mp3quran.net/sds/"},
+    husary:  {edition:"ar.husary", bitrate:128, primary:"https://server13.mp3quran.net/husr/", secondary:"https://cdn.islamic.network/quran/audio-surah/128/ar.husary/", fallback:"https://server13.mp3quran.net/husr/"},
+    minshawi:{edition:"ar.minshawi", bitrate:128, primary:"https://server10.mp3quran.net/minsh/", secondary:"https://cdn.islamic.network/quran/audio-surah/128/ar.minshawi/", fallback:"https://server10.mp3quran.net/minsh/"},
+    ayoub:   {edition:"ar.muhammadayoub", bitrate:128, primary:"https://server8.mp3quran.net/ayyub/", secondary:"https://cdn.islamic.network/quran/audio-surah/128/ar.muhammadayoub/", fallback:"https://server8.mp3quran.net/ayyub/"},
+    ajmi:    {edition:"ar.ajamy", bitrate:128, primary:"https://server10.mp3quran.net/ajm/", secondary:"https://cdn.islamic.network/quran/audio-surah/128/ar.ajamy/", fallback:"https://server10.mp3quran.net/ajm/"},
+    dossari: {edition:"", bitrate:128, primary:"https://server11.mp3quran.net/yasser/", fallback:"https://server11.mp3quran.net/yasser/"},
+    ghamdi:  {edition:"", bitrate:128, primary:"https://server7.mp3quran.net/s_gmd/", fallback:"https://server7.mp3quran.net/s_gmd/"},
+    maher:   {edition:"", bitrate:128, primary:"https://server12.mp3quran.net/maher/", fallback:"https://server12.mp3quran.net/maher/"},
+    shatri:  {edition:"", bitrate:128, primary:"https://server11.mp3quran.net/shatri/", fallback:"https://server11.mp3quran.net/shatri/"}
 };
 
 const reciterApiNames = {
@@ -1620,6 +1657,7 @@ let readerBarHidden = false;
 let lastBackTime = 0;
 let allowLeave = false;
 let scrollTimer = null;
+let restoringSection = false;
 
 document.documentElement.style.setProperty(
     "--quran-font",
@@ -1638,6 +1676,12 @@ document.addEventListener("DOMContentLoaded",function(){
 
     const base =
         location.href.split("#")[0];
+
+    // لا تسمح للمتصفح بإعادة موضع التمرير القديم عند زر الرجوع؛
+    // الرجوع في التطبيق يعني الرجوع بين الأقسام، وليس القفز للأعلى والأسفل.
+    if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+    }
 
     history.replaceState(
         {section:"home-menu",app:true},
@@ -1689,41 +1733,40 @@ document.addEventListener("DOMContentLoaded",function(){
             return;
         }
 
+        // الرجوع داخل التطبيق: خطوة واحدة فقط إلى القسم السابق.
         if(sectionHistory.length > 1){
-
             sectionHistory.pop();
-
-            const previous =
-                sectionHistory[sectionHistory.length - 1];
-
+            const previous = sectionHistory[sectionHistory.length - 1] || "home-menu";
+            currentSection = previous;
+            currentMode = previous === "listening" ? "listening" : currentMode;
             renderSection(previous);
 
+            // ثبّت الشاشة في موضع القسم السابق بدل أن يعيد المتصفح
+            // موضع التمرير القديم من سجل الصفحة.
+            requestAnimationFrame(function(){
+                window.scrollTo(0, 0);
+            });
             return;
         }
 
+        // نحن الآن في القائمة الرئيسية: الضغطة الأولى تنبيه،
+        // والضغطة الثانية تفتح رسالة الخروج.
         const now = Date.now();
-
         if(now - lastBackTime < 1800){
-
             showExitPrayer();
-
-        }else{
-
-            lastBackTime = now;
-
-            showToast("اضغط زر الرجوع مرة أخرى للخروج");
-
-            history.pushState(
-                {
-                    section:"home-menu",
-                    app:true,
-                    guard:true
-                },
-                "",
-                "#home-menu"
-            );
+            return;
         }
 
+        lastBackTime = now;
+        showToast("اضغط زر الرجوع مرة أخرى للخروج");
+        history.pushState(
+            {section:"home-menu",app:true,guard:true},
+            "",
+            "#home-menu"
+        );
+        requestAnimationFrame(function(){
+            window.scrollTo(0, 0);
+        });
     });
 
 });
@@ -1960,10 +2003,16 @@ function startAppHome(){
 function showSection(id){
     if(id === "reading" && currentSection !== "reader"){ openReadingHome(); return; }
     if(id === "offline"){ showOfflineManager(); return; }
-    if(id === currentSection){ renderSection(id); return; }
-    sectionHistory.push(id); currentSection=id;
+    if(id === currentSection){
+        renderSection(id);
+        requestAnimationFrame(function(){ window.scrollTo(0,0); });
+        return;
+    }
+    sectionHistory.push(id);
+    currentSection=id;
     history.pushState({section:id,app:true},"","#"+id);
     renderSection(id);
+    requestAnimationFrame(function(){ window.scrollTo(0,0); });
 }
 
 function trackFeature(key){
@@ -2556,41 +2605,73 @@ function updateAudioPlayButton(){
     if(b) b.textContent=(p && !p.paused) ? "❚❚" : "▶";
 }
 
-async function resolveReciterAudioUrl(reciter, surah){
-    const info=audioEditions[reciter] || audioEditions.basit;
-    const n=Math.max(1,Math.min(114,Number(surah)||1));
-    const file=String(n).padStart(3,"0")+".mp3";
+function audioFileForSurah(surah){
+    return String(Math.max(1,Math.min(114,Number(surah)||1))).padStart(3,"0")+".mp3";
+}
 
-    // هذه الإصدارات موثقة مباشرة في CDN الرسمي لـ Al Quran Cloud.
-    if(info.edition){
-        return `https://cdn.islamic.network/quran/audio-surah/${info.bitrate}/${info.edition}/${n}.mp3`;
-    }
-
-    // للقراء الذين تتغير مساراتهم، استخدم الخادم الذي اكتشفناه سابقًا.
-    if(reciterServerCache[reciter]) return String(reciterServerCache[reciter])+file;
-
+async function getReciterApiServer(reciter, surah){
     try{
+        const n=Math.max(1,Math.min(114,Number(surah)||1));
+        const wanted=normalizeReciterName(reciterApiNames[reciter]||"");
+        if(!wanted)return "";
         const response=await fetch("https://www.mp3quran.net/api/v3/reciters?language=ar&sura="+n,{cache:"no-store"});
-        if(response.ok){
-            const data=await response.json();
-            const wanted=normalizeReciterName(reciterApiNames[reciter]||"");
-            const list=Array.isArray(data.reciters)?data.reciters:[];
-            const found=list.find(r=>{
-                const name=normalizeReciterName(r.name);
-                return wanted && (name.includes(wanted) || wanted.includes(name));
-            });
-            if(found && Array.isArray(found.moshaf)){
-                const m=found.moshaf.find(x=>String(x.surah_list||"").split(",").includes(String(n))) || found.moshaf[0];
-                if(m && m.server){
-                    reciterServerCache[reciter]=String(m.server);
-                    try{localStorage.setItem("reciterServerCache",JSON.stringify(reciterServerCache));}catch(e){}
-                    return String(m.server)+file;
-                }
-            }
+        if(!response.ok)return "";
+        const data=await response.json();
+        const list=Array.isArray(data.reciters)?data.reciters:[];
+        const found=list.find(r=>{
+            const name=normalizeReciterName(r.name||"");
+            return name && (name.includes(wanted)||wanted.includes(name));
+        });
+        if(found && Array.isArray(found.moshaf)){
+            const m=found.moshaf.find(x=>String(x.surah_list||"").split(",").includes(String(n))) || found.moshaf[0];
+            if(m && m.server)return String(m.server);
         }
     }catch(e){}
+    return "";
+}
 
-    return info.fallback+file;
+async function getAudioCandidates(reciter,surah){
+    const info=audioEditions[reciter]||audioEditions.basit;
+    const file=audioFileForSurah(surah);
+    const candidates=[];
+    const add=(u)=>{if(u && !candidates.includes(u))candidates.push(u)};
+
+    // المصدر الأساسي: MP3Quran، بصيغة 001.mp3 التي يستخدمها خادم التلاوات.
+    add(String(info.primary||info.fallback||"")+file);
+
+    // المصدر الثاني: CDN الرسمي لـ Al Quran Cloud للقراء الذين يتوفر لهم إصدار مباشر.
+    if(info.secondary)add(String(info.secondary)+String(Number(surah)||1)+".mp3");
+
+    // للقراء غير الموجودين في CDN، نحاول اكتشاف الخادم من API الرسمي لـ MP3Quran.
+    if(!info.secondary){
+        const server=reciterServerCache[reciter] || await getReciterApiServer(reciter,surah);
+        if(server){
+            reciterServerCache[reciter]=server;
+            try{localStorage.setItem("reciterServerCache",JSON.stringify(reciterServerCache));}catch(e){}
+            add(server+file);
+        }
+    }
+
+    // المصدر الاحتياطي النهائي.
+    add(String(info.fallback||"")+file);
+    return candidates;
+}
+
+function setAudioSource(player,url,status){
+    return new Promise(resolve=>{
+        let settled=false;
+        const done=(ok)=>{if(settled)return;settled=true;cleanup();resolve(ok)};
+        const cleanup=()=>{player.removeEventListener("canplay",onCanPlay);player.removeEventListener("loadedmetadata",onCanPlay);player.removeEventListener("error",onError)};
+        const onCanPlay=()=>done(true);
+        const onError=()=>done(false);
+        player.addEventListener("canplay",onCanPlay,{once:true});
+        player.addEventListener("loadedmetadata",onCanPlay,{once:true});
+        player.addEventListener("error",onError,{once:true});
+        player.src=url;
+        player.load();
+        if(status)status.textContent="⏳ جاري اختبار مصدر التلاوة…";
+        setTimeout(()=>done(false),9000);
+    });
 }
 
 async function loadAudio(){
@@ -2599,39 +2680,56 @@ async function loadAudio(){
     const box=document.getElementById("audioBox");
     if(!player || !box)return;
 
-    // ضمان ظهور المشغل والقارئ فور اختيار السورة.
     box.classList.add("show");
     currentMode="listening";
     updateAudioMeta();
     status.textContent="⏳ جاري تجهيز التلاوة…";
     updateAudioPlayButton();
-
-    player.dataset.fallbackTried="0";
     player.pause();
     player.removeAttribute("src");
     player.load();
 
-    const url=await resolveReciterAudioUrl(currentReciter,currentSurah);
-    const file=String(currentSurah).padStart(3,"0")+".mp3";
+    const candidates=await getAudioCandidates(currentReciter,currentSurah);
+    const file=audioFileForSurah(currentSurah);
+    const cacheName="quran-audio-"+currentReciter+"-v3";
 
-    // إذا كانت محفوظة محليًا، استخدمها أولًا.
+    // جرّب النسخ المحفوظة أولًا.
     try{
-        const c=await caches.open("quran-audio-"+currentReciter+"-v2");
-        const direct=(audioEditions[currentReciter]||audioEditions.basit);
-        const cached=await c.match(url) || (direct.fallback ? await c.match(direct.fallback+file) : null);
-        if(cached){
-            const blob=await cached.blob();
-            player.src=URL.createObjectURL(blob);
-            status.textContent="📱 التلاوة محفوظة على جهازك";
-        }else{
-            player.src=url;
-            status.textContent="🎧 جاهز للاستماع — اضغط ▶";
+        const c=await caches.open(cacheName);
+        for(const url of candidates){
+            const cached=await c.match(url);
+            if(cached){
+                const blob=await cached.blob();
+                const objectUrl=URL.createObjectURL(blob);
+                const ok=await setAudioSource(player,objectUrl,status);
+                if(ok){
+                    player.dataset.objectUrl=objectUrl;
+                    status.textContent="📱 التلاوة محفوظة على جهازك";
+                    applySavedAudioSettings();
+                    return;
+                }
+                URL.revokeObjectURL(objectUrl);
+            }
         }
-    }catch(e){
-        player.src=url;
-        status.textContent="🎧 جاهز للاستماع — اضغط ▶";
+    }catch(e){}
+
+    // جرّب المصادر واحدًا تلو الآخر بدل البقاء عالقًا على رسالة المصدر الاحتياطي.
+    for(let i=0;i<candidates.length;i++){
+        const ok=await setAudioSource(player,candidates[i],status);
+        if(ok){
+            player.dataset.activeSource=candidates[i];
+            status.textContent="🎧 جاهز للاستماع — اضغط ▶";
+            applySavedAudioSettings();
+            return;
+        }
     }
 
+    status.textContent="❌ تعذر الوصول إلى مصادر التلاوة. اضغط ▶ لإعادة المحاولة أو تحقق من اتصال الإنترنت.";
+    updateAudioPlayButton();
+}
+
+function applySavedAudioSettings(){
+    const player=document.getElementById("audioPlayer");
     const savedVolume=parseFloat(localStorage.getItem("quranVolume"));
     player.volume=Number.isFinite(savedVolume)?savedVolume:1;
     const savedRate=parseFloat(localStorage.getItem("quranPlaybackRate"));
@@ -2645,19 +2743,19 @@ async function loadAudio(){
     document.getElementById("speedBtn").textContent=(player.playbackRate||1)+"×";
     updateAudioMeta();
     updateAudioPlayButton();
-    player.load();
 }
 
 async function toggleAudioPlay(){
     const player=document.getElementById("audioPlayer");
     try{
         if(player.paused){
+            if(!player.src){ await loadAudio(); }
             await player.play();
         }else{
             player.pause();
         }
     }catch(e){
-        document.getElementById("audioStatus").textContent="❌ اضغط مرة أخرى لبدء التلاوة.";
+        document.getElementById("audioStatus").textContent="❌ لم يبدأ التشغيل. اضغط ▶ مرة أخرى.";
     }
     updateAudioPlayButton();
 }
@@ -2687,19 +2785,14 @@ function toggleAudioRepeat(){
 
 function downloadCurrentAudio(){
     const p=document.getElementById("audioPlayer");
-    if(!p.src){return;}
-    const a=document.createElement("a");
-    a.href=p.src;
-    a.download="surah-"+currentSurah+".mp3";
-    a.target="_blank";
-    a.rel="noopener";
-    a.click();
-    document.getElementById("audioStatus").textContent="⬇️ بدأ تنزيل التلاوة إن كان المتصفح يسمح بذلك.";
+    if(!p.src)return;
+    const a=document.createElement("a");a.href=p.src;a.download="surah-"+currentSurah+".mp3";a.target="_blank";a.rel="noopener";a.click();
 }
 
 function changeReciter(){
     currentReciter=document.getElementById("reciterSelect").value;
     localStorage.setItem("quranReciter",currentReciter);
+    try{delete reciterServerCache[currentReciter];localStorage.setItem("reciterServerCache",JSON.stringify(reciterServerCache));}catch(e){}
     if(currentMode==="listening") loadAudio();
 }
 
@@ -2711,45 +2804,18 @@ audioPlayer.addEventListener("loadedmetadata",function(){
     document.getElementById("audioDuration").textContent=formatAudioTime(audioPlayer.duration);
 });
 audioPlayer.addEventListener("timeupdate",function(){
-    if(Number.isFinite(audioPlayer.duration)){
-        audioProgress.value=(audioPlayer.currentTime/audioPlayer.duration)*100;
-    }
+    if(Number.isFinite(audioPlayer.duration))audioProgress.value=(audioPlayer.currentTime/audioPlayer.duration)*100;
     document.getElementById("audioCurrentTime").textContent=formatAudioTime(audioPlayer.currentTime);
 });
-audioPlayer.addEventListener("play",function(){
+audioPlayer.addEventListener("play",function(){updateAudioPlayButton();document.getElementById("audioStatus").textContent="▶️ التلاوة تعمل الآن"});
+audioPlayer.addEventListener("pause",function(){updateAudioPlayButton()});
+audioPlayer.addEventListener("ended",function(){updateAudioPlayButton();if(!audioPlayer.loop)document.getElementById("audioStatus").textContent="✅ انتهت التلاوة"});
+audioPlayer.addEventListener("error",function(){
     updateAudioPlayButton();
-    document.getElementById("audioStatus").textContent="▶️ التلاوة تعمل الآن";
+    // loadAudio يدير التبديل بين المصادر، لذلك لا نغيّر المصدر هنا حتى لا ندخل في حلقة fallback.
 });
-audioPlayer.addEventListener("pause",function(){
-    updateAudioPlayButton();
-});
-audioPlayer.addEventListener("ended",function(){
-    updateAudioPlayButton();
-    if(!audioPlayer.loop) document.getElementById("audioStatus").textContent="✅ انتهت التلاوة";
-});
-audioPlayer.addEventListener("error",async function(){
-    if(audioPlayer.dataset.fallbackTried!=="1"){
-        audioPlayer.dataset.fallbackTried="1";
-        const info=audioEditions[currentReciter]||audioEditions.basit;
-        if(info.fallback){
-            audioPlayer.src=info.fallback+String(currentSurah).padStart(3,"0")+".mp3";
-            audioPlayer.load();
-            document.getElementById("audioStatus").textContent="⏳ جاري تجربة المصدر الاحتياطي…";
-            return;
-        }
-    }
-    document.getElementById("audioStatus").textContent="❌ تعذر تحميل التلاوة. تحقق من اتصال الإنترنت ثم اضغط ▶ مرة أخرى.";
-    updateAudioPlayButton();
-});
-audioProgress.addEventListener("input",function(){
-    if(Number.isFinite(audioPlayer.duration)){
-        audioPlayer.currentTime=(Number(this.value)/100)*audioPlayer.duration;
-    }
-});
-audioVolume.addEventListener("input",function(){
-    audioPlayer.volume=Number(this.value);
-    localStorage.setItem("quranVolume",this.value);
-});
+audioProgress.addEventListener("input",function(){if(Number.isFinite(audioPlayer.duration))audioPlayer.currentTime=(Number(this.value)/100)*audioPlayer.duration});
+audioVolume.addEventListener("input",function(){audioPlayer.volume=Number(this.value);localStorage.setItem("quranVolume",this.value)});
 
 function showToast(message){
 
@@ -2974,7 +3040,7 @@ function openReadingHome(){try{renderSurahs();}catch(e){} const x=JSON.parse(loc
 function closeContinuePrompt(){document.getElementById("continueReadingModal").classList.remove("show");restoreBodyScrollIfNoModal()}
 function resumeSavedReading(){const x=JSON.parse(localStorage.getItem("lastReading")||"null");closeContinuePrompt();if(x){currentMode="reading";openSurah(Number(x.surah),true)}}
 function chooseSurahAfterPrompt(){closeContinuePrompt();showSectionDirect("reading")}
-function showSectionDirect(id){sectionHistory.push(id);currentSection=id;history.pushState({section:id,app:true},"","#"+id);renderSection(id)}
+function showSectionDirect(id){sectionHistory.push(id);currentSection=id;history.pushState({section:id,app:true},"","#"+id);renderSection(id);requestAnimationFrame(function(){window.scrollTo(0,0);})}
 
 
 
@@ -3294,7 +3360,8 @@ async function prepareOfflineQuran(){
 }
 
 async function offlineAudioUrl(reciter,surah){
-    return await resolveReciterAudioUrl(reciter,surah);
+    const candidates=await getAudioCandidates(reciter,surah);
+    return candidates[0] || "";
 }
 
 async function downloadOfflineSelectedSurah(){
@@ -3307,8 +3374,8 @@ async function downloadOfflineSelectedSurah(){
 
 async function downloadOfflineSurah(reciter,surah){
     const b=document.getElementById("offlineAudioStatus");
-    const cacheName="quran-audio-"+reciter+"-v2";
-    const url=offlineAudioUrl(reciter,surah);
+    const cacheName="quran-audio-"+reciter+"-v3";
+    const url=await offlineAudioUrl(reciter,surah);
     try{
         const c=await caches.open(cacheName);
         if(await c.match(url)){b.textContent="✅ هذه التلاوة محفوظة بالفعل على الهاتف.";return true;}
@@ -3328,7 +3395,7 @@ async function downloadOfflineSelectedReciter(){
     populateOfflineSelectors();
     const reciter=document.getElementById("offlineReciterSelect").value;
     const b=document.getElementById("offlineAudioStatus");
-    const cacheName="quran-audio-"+reciter+"-v2";
+    const cacheName="quran-audio-"+reciter+"-v3";
     try{
         const c=await caches.open(cacheName); let done=0,failed=0;
         for(let i=1;i<=114;i++){
@@ -3361,7 +3428,7 @@ async function clearOfflineAudio(){
 
 async function getOfflineCount(reciter){
     try{
-        const c=await caches.open("quran-audio-"+reciter+"-v2");
+        const c=await caches.open("quran-audio-"+reciter+"-v3");
         let count=0;
         for(let i=1;i<=114;i++){
             const url=await offlineAudioUrl(reciter,i);
