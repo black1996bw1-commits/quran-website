@@ -1,4 +1,4 @@
-const CACHE_NAME = 'al-iman-v20-surah-fixed';
+const CACHE_NAME = 'al-iman-v24-source-fix';
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -29,13 +29,22 @@ self.addEventListener("activate", event => {
 });
 
 self.addEventListener("fetch", event => {
-  if (event.request.method !== "GET") return;
+  if(event.request.method !== "GET") return;
+
+  const url = new URL(event.request.url);
+  const sameOrigin = url.origin === self.location.origin;
+
+  // لا نعيد index.html بدل ملفات الصوت أو API الخارجية عند فشل الاتصال.
+  // هذا يمنع المتصفح من اعتبار HTML ملفًا صوتيًا أو نتيجة API.
+  if(!sameOrigin) return;
 
   event.respondWith(
     fetch(event.request)
       .then(response => {
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
+        if(response && response.ok){
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy)).catch(()=>{});
+        }
         return response;
       })
       .catch(() => caches.match(event.request).then(cached => cached || caches.match("./index.html")))

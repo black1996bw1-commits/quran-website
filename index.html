@@ -243,7 +243,20 @@ main{
     padding:18px 15px 50px;
 }
 
-@media(max-width:600px){.menu-grid{grid-template-columns:repeat(2,1fr);gap:9px}.menu-card{min-height:130px;padding:16px 9px}.menu-card .emoji{font-size:31px}.menu-card h3{font-size:15px}.menu-card p{font-size:11px}.feature-sheet{margin:2vh auto 0;padding:15px}.feature-all-grid{grid-template-columns:repeat(2,1fr)}}
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:14px;
+    width:100%;
+}
+
+.menu-grid .menu-card{
+    width:100%;
+    min-width:0;
+    box-sizing:border-box;
+}
+
+@media(max-width:600px){.menu-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.menu-card{min-height:150px;width:100%;padding:16px 9px}.menu-card .emoji{font-size:31px}.menu-card h3{font-size:15px}.menu-card p{font-size:11px}}
 
 .menu-card{
     min-height:190px;
@@ -1027,33 +1040,6 @@ footer{
 
 </section>
 
-<div class="feature-modal" id="featureModal" onclick="if(event.target===this)closeFeatureHub()">
-    <div class="feature-sheet">
-        <div class="feature-top"><h3>كل ميزات التطبيق</h3><button class="feature-close" onclick="closeFeatureHub()">×</button></div>
-        <div class="feature-tabs">
-            <button class="feature-tab active" data-cat="all" onclick="filterFeatureHub('all',this)">الكل</button>
-            <button class="feature-tab" data-cat="quran" onclick="filterFeatureHub('quran',this)">القرآن</button>
-            <button class="feature-tab" data-cat="worship" onclick="filterFeatureHub('worship',this)">العبادة</button>
-            <button class="feature-tab" data-cat="tools" onclick="filterFeatureHub('tools',this)">الأدوات</button>
-        </div>
-        <div class="feature-all-grid" id="featureAllGrid">
-            <button class="menu-card" data-cat="quran" onclick="closeFeatureHub();trackFeature('reading');openReadingHome()"><span class="emoji">📖</span><h3>قراءة القرآن الكريم</h3><p>قراءة سور القرآن الكريم بالخط العثماني</p></button>
-            <button class="menu-card" data-cat="quran" onclick="closeFeatureHub();trackFeature('listening');showSection('listening')"><span class="emoji">🎧</span><h3>الاستماع</h3><p>التلاوات</p></button>
-            <button class="menu-card" data-cat="quran" onclick="closeFeatureHub();trackFeature('search');showSection('search')"><span class="emoji">🔎</span><h3>البحث</h3><p>ابحث في القرآن</p></button>
-            <button class="menu-card" data-cat="quran" onclick="closeFeatureHub();trackFeature('hifz');showSection('hifz')"><span class="emoji">🧠</span><h3>حفظ القرآن</h3><p>خطة الحفظ</p></button>
-            <button class="menu-card" data-cat="quran" onclick="closeFeatureHub();trackFeature('tasmiya');openTasmiyaHome()"><span class="emoji">🎙️</span><h3>التسميع</h3><p>تسميع تفاعلي</p></button>
-            <button class="menu-card" data-cat="quran" onclick="closeFeatureHub();trackFeature('readwith');openReadWithUs()"><span class="emoji">📣</span><h3>اقرأ معنا</h3><p>تلقين وترديد تدريجي</p></button>
-            <button class="menu-card" data-cat="worship" onclick="closeFeatureHub();trackFeature('adhkar');showSection('adhkar')"><span class="emoji">🤲</span><h3>الأذكار</h3><p>أذكار اليوم</p></button>
-            <button class="menu-card" data-cat="worship" onclick="closeFeatureHub();trackFeature('asma');showSection('asma')"><span class="emoji">🕋</span><h3>أسماء الله</h3><p>99 اسمًا ومعانيها</p></button>
-            <button class="menu-card" data-cat="worship" onclick="closeFeatureHub();trackFeature('khatma');showSection('khatma')"><span class="emoji">📅</span><h3>خطة الختمة</h3><p>ورد يومي</p></button>
-            <button class="menu-card" data-cat="worship" onclick="closeFeatureHub();trackFeature('prayer');openPrayerTimes()"><span class="emoji">🕰️</span><h3>مواعيد الصلاة</h3><p>أوقات الصلاة حسب بلدك</p></button>
-            <button class="menu-card" data-cat="tools" onclick="closeFeatureHub();trackFeature('qibla');openQibla()"><span class="emoji">🧭</span><h3>بوصلة القبلة</h3><p>اتجاه القبلة</p></button>
-            <button class="menu-card" data-cat="tools" onclick="closeFeatureHub();trackFeature('offline');showOfflineManager()"><span class="emoji">📥</span><h3>دون إنترنت</h3><p>إدارة المحتوى المحفوظ</p></button>
-            <button class="menu-card" data-cat="tools" onclick="closeFeatureHub();showFavorites()"><span class="emoji">⭐</span><h3>الآيات المحفوظة</h3><p>المفضلة</p></button>
-        </div>
-    </div>
-</div>
-
 <section class="section" id="reading">
 
     <h2 class="section-title">📖 قراءة القرآن الكريم</h2>
@@ -1594,6 +1580,27 @@ const reciterApiNames = {
     ayoub:"محمد أيوب", shatri:"الشاطري", ajmi:"العجمي"
 };
 
+// نخزن خادم MP3Quran الذي تم اكتشافه مرة واحدة، حتى لا نعيد طلب قائمة القراء
+// عند كل سورة، وحتى تعمل ميزة الحفظ دون إنترنت بنفس الرابط الذي سيستخدمه المشغل.
+let reciterServerCache = {};
+try {
+    reciterServerCache = JSON.parse(localStorage.getItem("reciterServerCache") || "{}");
+    if(!reciterServerCache || typeof reciterServerCache !== "object") reciterServerCache = {};
+} catch(e) { reciterServerCache = {}; }
+
+function normalizeReciterName(name){
+    return String(name||"")
+        .normalize("NFD")
+        .replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g,"")
+        .replace(/[أإآٱ]/g,"ا")
+        .replace(/[ىي]/g,"ي")
+        .replace(/[ؤ]/g,"و")
+        .replace(/[ئ]/g,"ي")
+        .replace(/الشيخ/g,"")
+        .replace(/[^\u0600-\u06FFa-zA-Z0-9]/g,"")
+        .toLowerCase();
+}
+
 let currentSurah = 1;
 let currentMode = "reading";
 let currentSection = "home-menu";
@@ -1968,23 +1975,6 @@ function trackFeature(key){
     }catch(e){}
 }
 
-function openFeatureHub(){
-    const m=document.getElementById('featureModal');
-    if(m){m.classList.add('open');document.body.style.overflow='hidden';filterFeatureHub('all',document.querySelector('.feature-tab[data-cat="all"]'));}
-}
-function closeFeatureHub(){
-    const m=document.getElementById('featureModal');
-    if(m)m.classList.remove('open');
-    document.body.style.overflow='';
-}
-function filterFeatureHub(cat,btn){
-    document.querySelectorAll('.feature-tab').forEach(x=>x.classList.remove('active'));
-    if(btn)btn.classList.add('active');
-    document.querySelectorAll('#featureAllGrid .menu-card').forEach(card=>{
-        card.style.display=(cat==='all'||card.dataset.cat===cat)?'':'none';
-    });
-}
-
 function renderSection(id){
 
     currentSection = id;
@@ -2223,6 +2213,27 @@ function toggleReaderBar(){
     readerBarHidden=!readerBarHidden;
     updateReaderBar();
 }
+function updateContinueBox(){
+    const button = document.getElementById("continueBtn");
+    const box = document.getElementById("continueBox");
+    if(!button || !box) return;
+
+    let saved = null;
+    try{ saved = JSON.parse(localStorage.getItem("lastReading") || "null"); }catch(e){ saved = null; }
+
+    if(!saved || !saved.surah || !SURAHS[Number(saved.surah)-1]){
+        button.style.display = "none";
+        box.classList.remove("show");
+        box.innerHTML = "";
+        return;
+    }
+
+    const name = SURAHS[Number(saved.surah)-1][0];
+    button.style.display = "inline-block";
+    box.classList.add("show");
+    box.innerHTML = `📖 آخر قراءة لك كانت في <strong>سورة ${name}</strong><br><button class="utility-btn" style="margin-top:10px" onclick="continueReading()">متابعة القراءة</button>`;
+}
+
 function saveLastReading(){
     try{
         localStorage.setItem("lastReading",JSON.stringify({surah:currentSurah,scroll:window.scrollY||0}));
@@ -2547,31 +2558,38 @@ function updateAudioPlayButton(){
 
 async function resolveReciterAudioUrl(reciter, surah){
     const info=audioEditions[reciter] || audioEditions.basit;
-    const n=Number(surah);
+    const n=Math.max(1,Math.min(114,Number(surah)||1));
     const file=String(n).padStart(3,"0")+".mp3";
 
-    // المصادر المعروفة في CDN تعمل مباشرة من المتصفح.
+    // هذه الإصدارات موثقة مباشرة في CDN الرسمي لـ Al Quran Cloud.
     if(info.edition){
         return `https://cdn.islamic.network/quran/audio-surah/${info.bitrate}/${info.edition}/${n}.mp3`;
     }
 
-    // للقراء الذين قد تتغير معرفاتهم، نطلب المصدر الحالي من واجهة MP3Quran.
+    // للقراء الذين تتغير مساراتهم، استخدم الخادم الذي اكتشفناه سابقًا.
+    if(reciterServerCache[reciter]) return String(reciterServerCache[reciter])+file;
+
     try{
-        const response=await fetch("https://www.mp3quran.net/api/v3/reciters?language=ar",{cache:"no-store"});
+        const response=await fetch("https://www.mp3quran.net/api/v3/reciters?language=ar&sura="+n,{cache:"no-store"});
         if(response.ok){
             const data=await response.json();
-            const wanted=(reciterApiNames[reciter]||"").replace(/[أإآ]/g,"ا");
+            const wanted=normalizeReciterName(reciterApiNames[reciter]||"");
             const list=Array.isArray(data.reciters)?data.reciters:[];
-            let found=list.find(r=>{
-                const name=String(r.name||"").replace(/[أإآ]/g,"ا");
-                return name.includes(wanted) || wanted.includes(name);
+            const found=list.find(r=>{
+                const name=normalizeReciterName(r.name);
+                return wanted && (name.includes(wanted) || wanted.includes(name));
             });
             if(found && Array.isArray(found.moshaf)){
                 const m=found.moshaf.find(x=>String(x.surah_list||"").split(",").includes(String(n))) || found.moshaf[0];
-                if(m && m.server) return String(m.server)+file;
+                if(m && m.server){
+                    reciterServerCache[reciter]=String(m.server);
+                    try{localStorage.setItem("reciterServerCache",JSON.stringify(reciterServerCache));}catch(e){}
+                    return String(m.server)+file;
+                }
             }
         }
     }catch(e){}
+
     return info.fallback+file;
 }
 
@@ -3241,7 +3259,7 @@ function populateOfflineSelectors(){
     if(!r||!s)return;
     if(!r.options.length){
         const names={basit:"عبدالباسط عبدالصمد",sudais:"عبدالرحمن السديس",dossari:"ياسر الدوسري",husary:"محمود خليل الحصري",minshawi:"محمد صديق المنشاوي",ghamdi:"سعد الغامدي",maher:"ماهر المعيقلي",ayoub:"محمد أيوب",shatri:"أبو بكر الشاطري",ajmi:"أحمد بن علي العجمي"};
-        Object.keys(servers).forEach(key=>{const o=document.createElement("option");o.value=key;o.textContent=names[key]||key;r.appendChild(o);});
+        Object.keys(audioEditions).forEach(key=>{const o=document.createElement("option");o.value=key;o.textContent=names[key]||key;r.appendChild(o);});
         r.value=currentReciter||"basit";
     }
     if(!s.options.length){
@@ -3275,8 +3293,8 @@ async function prepareOfflineQuran(){
     b.textContent="✅ القرآن المقروء كاملًا مثبت ويعمل دون اتصال.";
 }
 
-function offlineAudioUrl(reciter,surah){
-    return servers[reciter]+String(surah).padStart(3,"0")+".mp3";
+async function offlineAudioUrl(reciter,surah){
+    return await resolveReciterAudioUrl(reciter,surah);
 }
 
 async function downloadOfflineSelectedSurah(){
@@ -3314,7 +3332,7 @@ async function downloadOfflineSelectedReciter(){
     try{
         const c=await caches.open(cacheName); let done=0,failed=0;
         for(let i=1;i<=114;i++){
-            const url=offlineAudioUrl(reciter,i);
+            const url=await offlineAudioUrl(reciter,i);
             if(await c.match(url)){done++;continue;}
             try{
                 b.textContent="⏳ تنزيل سور القارئ: "+done+" / 114 — سورة "+SURAHS[i-1][0];
@@ -3345,7 +3363,10 @@ async function getOfflineCount(reciter){
     try{
         const c=await caches.open("quran-audio-"+reciter+"-v2");
         let count=0;
-        for(let i=1;i<=114;i++) if(await c.match(offlineAudioUrl(reciter,i))) count++;
+        for(let i=1;i<=114;i++){
+            const url=await offlineAudioUrl(reciter,i);
+            if(await c.match(url)) count++;
+        }
         return count;
     }catch(e){ return 0; }
 }
@@ -3357,7 +3378,7 @@ async function renderOfflineLibrary(){
     const names={basit:"عبدالباسط عبدالصمد",sudais:"عبدالرحمن السديس",dossari:"ياسر الدوسري",husary:"محمود خليل الحصري",minshawi:"محمد صديق المنشاوي",ghamdi:"سعد الغامدي",maher:"ماهر المعيقلي",ayoub:"محمد أيوب",shatri:"أبو بكر الشاطري",ajmi:"أحمد بن علي العجمي"};
     box.innerHTML='<div style="color:var(--muted);font-size:13px">جاري فحص التلاوات المحفوظة...</div>';
     const rows=[];
-    for(const key of Object.keys(servers)){
+    for(const key of Object.keys(audioEditions)){
         const count=await getOfflineCount(key);
         if(count>0)rows.push('<div class="offline-file-row"><div class="offline-file-info"><strong>'+names[key]+'</strong><span>'+count+' / 114 سورة محفوظة دون إنترنت</span></div><span class="offline-badge">✓ محفوظ</span></div>');
     }
