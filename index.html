@@ -243,41 +243,7 @@ main{
     padding:18px 15px 50px;
 }
 
-.smart-home-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 auto 18px;max-width:1050px;text-align:right}
-.smart-home-head .welcome{flex:1}
-.smart-home-head h2{margin:0;color:var(--gold2);font-family:"Amiri",serif;font-size:30px}
-.smart-home-head p{margin:4px 0 0;color:var(--muted);font-size:13px}
-.smart-home-head .all-features-btn{white-space:nowrap;border:1px solid var(--gold);background:rgba(215,187,121,.08);color:var(--gold2);border-radius:14px;padding:11px 16px;font:inherit;font-weight:bold;cursor:pointer}
-.smart-continue{display:none;max-width:1050px;margin:0 auto 16px;padding:15px 18px;border:1px solid rgba(215,187,121,.3);border-radius:20px;background:linear-gradient(135deg,rgba(215,187,121,.11),rgba(255,255,255,.025));text-align:right;cursor:pointer}
-.smart-continue.show{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.smart-continue .sc-main{display:flex;align-items:center;gap:12px}.smart-continue .sc-icon{font-size:30px}.smart-continue b{display:block;color:var(--gold2);margin-bottom:3px}.smart-continue span{font-size:12px;color:var(--muted)}
-.smart-continue .sc-arrow{font-size:22px;color:var(--gold2)}
-.quick-label{max-width:1050px;margin:18px auto 10px;text-align:right;color:var(--muted);font-size:12px}
-.smart-insight{max-width:1050px;margin:0 auto 14px;display:flex;align-items:center;gap:12px;padding:13px 15px;border:1px solid rgba(215,187,121,.22);border-radius:18px;background:linear-gradient(110deg,rgba(215,187,121,.09),rgba(255,255,255,.025));text-align:right}
-.smart-insight .insight-icon{font-size:26px;flex:0 0 auto}.insight-body{flex:1;min-width:0}.insight-body b{display:block;color:var(--gold2);font-size:14px;margin-bottom:3px}.insight-body span{display:block;color:var(--muted);font-size:11px;line-height:1.6}.smart-insight button{border:1px solid var(--gold);background:rgba(215,187,121,.08);color:var(--gold2);border-radius:11px;padding:8px 12px;font:inherit;font-size:12px;font-weight:bold;cursor:pointer;white-space:nowrap}
-.smart-card-badge{display:inline-block;margin-top:9px;padding:3px 8px;border-radius:999px;background:rgba(215,187,121,.08);color:var(--gold2);font-size:10px}
-.smart-all-cards{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
-.smart-all-cards .menu-card{position:relative;min-height:145px;overflow:hidden;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
-.smart-all-cards .menu-card:hover{transform:translateY(-2px)}
-.smart-all-cards .menu-card:active{transform:translateY(0) scale(.98)}
-.smart-all-cards .menu-card.smart-primary{border-color:rgba(215,187,121,.30)}
-.smart-all-cards .menu-card.smart-recommended{border-color:var(--gold);box-shadow:0 0 0 1px rgba(215,187,121,.10),0 10px 28px rgba(0,0,0,.18)}
-.smart-all-cards .menu-card.smart-recommended:after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(215,187,121,.08),transparent 55%);pointer-events:none}
-.smart-card-arrow{display:block;margin-top:8px;font-size:10px;color:var(--muted)}
-
-
-.menu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:1050px;margin:auto}
-.menu-card{min-height:145px;border:1px solid var(--border);border-radius:21px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.015)),var(--card);color:var(--text);box-shadow:var(--shadow);padding:19px 12px;transition:.25s;cursor:pointer}
-.menu-card:hover{transform:translateY(-4px);border-color:var(--gold)}
-.menu-card .emoji{font-size:34px;display:block;margin-bottom:7px}.menu-card h3{font-size:17px;color:var(--gold2);margin:0 0 5px}.menu-card p{color:var(--muted);font-size:12px;line-height:1.6;margin:0}
-.menu-card.smart-primary{border-color:rgba(215,187,121,.35);background:linear-gradient(145deg,rgba(215,187,121,.09),rgba(255,255,255,.02)),var(--card)}
-.feature-modal{position:fixed;inset:0;z-index:9999;display:none;background:rgba(0,0,0,.68);backdrop-filter:blur(8px);padding:18px;box-sizing:border-box;overflow:auto}
-.feature-modal.open{display:block}.feature-sheet{max-width:900px;margin:5vh auto 0;background:var(--bg2);border:1px solid var(--border);border-radius:26px;padding:20px;box-shadow:0 25px 80px rgba(0,0,0,.5)}
-.feature-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.feature-top h3{margin:0;color:var(--gold2);font-family:"Amiri",serif;font-size:28px}.feature-close{width:42px;height:42px;border:1px solid var(--border);border-radius:12px;background:var(--card);color:var(--text);font-size:22px;cursor:pointer}
-.feature-tabs{display:flex;gap:8px;overflow:auto;padding-bottom:9px;margin-bottom:12px}.feature-tab{border:1px solid var(--border);background:var(--card);color:var(--muted);border-radius:12px;padding:9px 13px;white-space:nowrap;cursor:pointer;font:inherit}.feature-tab.active{border-color:var(--gold);color:var(--gold2);background:rgba(215,187,121,.08)}
-.feature-all-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.feature-all-grid .menu-card{min-height:125px}
-@media(max-width:850px){.menu-grid{grid-template-columns:repeat(3,1fr)}.feature-all-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.smart-all-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.smart-all-cards .menu-card{min-height:132px}.smart-home-head{align-items:flex-start}.smart-home-head h2{font-size:25px}.smart-home-head .all-features-btn{padding:9px 11px;font-size:12px}.menu-grid{grid-template-columns:repeat(2,1fr);gap:9px}.menu-card{min-height:130px;padding:16px 9px}.menu-card .emoji{font-size:31px}.menu-card h3{font-size:15px}.menu-card p{font-size:11px}.feature-sheet{margin:2vh auto 0;padding:15px}.feature-all-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.menu-grid{grid-template-columns:repeat(2,1fr);gap:9px}.menu-card{min-height:130px;padding:16px 9px}.menu-card .emoji{font-size:31px}.menu-card h3{font-size:15px}.menu-card p{font-size:11px}.feature-sheet{margin:2vh auto 0;padding:15px}.feature-all-grid{grid-template-columns:repeat(2,1fr)}}
 
 .menu-card{
     min-height:190px;
@@ -920,12 +886,12 @@ footer{
     }
 
     .ayah{
-        padding:17px 7px 17px 38px;
+        padding:15px 6px 15px 40px;
     }
 
     .ayah-text{
-        font-size:var(--quran-font,27px);
-        line-height:2.15;
+        font-size:var(--quran-font,23px);
+        line-height:2;
     }
 
     .ayah-number{
@@ -967,323 +933,8 @@ footer{
 .content-card{margin:0 auto 18px;max-width:900px;padding:22px;border:1px solid var(--border);border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015)),var(--card);box-shadow:var(--shadow)}
 .wide-input{width:100%;box-sizing:border-box;margin:10px 0 15px;padding:13px 15px;border-radius:13px;border:1px solid var(--border);background:var(--bg2);color:var(--text);outline:none}.progress-card{margin-top:18px;padding:16px;border-radius:16px;background:rgba(215,187,121,.055);border:1px solid rgba(215,187,121,.16);line-height:2}.progress-bar{height:10px;margin:12px 0;border-radius:20px;overflow:hidden;background:rgba(255,255,255,.1)}.progress-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--green2),var(--gold))}.adhkar-item{margin:12px 0;padding:18px;border:1px solid var(--border);border-radius:18px;background:rgba(255,255,255,.025)}.adhkar-item .dhikr-text{font-family:"Amiri",serif;font-size:24px;line-height:2.15}.adhkar-item .dhikr-meta{color:var(--muted);font-size:13px;margin-top:8px}.dhikr-counter{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:14px}.dhikr-counter button{min-width:44px;height:44px;border:1px solid var(--gold);border-radius:12px;background:var(--green);color:#fff;font-weight:bold}.dhikr-count{min-width:55px;text-align:center;color:var(--gold2);font-size:20px;font-weight:bold}.asma-card{min-height:125px;display:flex;flex-direction:column;align-items:center;justify-content:center}.asma-number{color:var(--muted);font-size:12px}.asma-name{font-family:"Amiri",serif;font-size:25px;color:var(--gold2)}.download-status{margin-top:12px;color:var(--muted);line-height:1.9}
 
-/* واجهات الأذكار وأسماء الله الحسنى والمصحف */
-.feature-modal .modal-box{
-    width:min(900px,100%);
-    max-height:92vh;
-    padding:20px;
-}
-.feature-modal .modal-close{
-    top:10px;
-    left:10px;
-    z-index:2;
-    background:var(--card);
-}
-.feature-modal-title{
-    color:var(--gold2);
-    font-family:"Amiri",serif;
-    font-size:30px;
-    text-align:center;
-    margin:5px 45px 18px;
-}
-.adhkar-modal-list{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-}
-.adhkar-modal-list .adhkar-item{
-    margin:0;
-}
-.asma-modal-name{
-    font-family:"Amiri",serif;
-    font-size:38px;
-    color:var(--gold2);
-    text-align:center;
-    margin:5px 0 18px;
-}
-.asma-modal-meaning{
-    font-size:18px;
-    line-height:2.25;
-    text-align:center;
-    padding:18px;
-    border-radius:18px;
-    background:rgba(215,187,121,.06);
-    border:1px solid var(--border);
-}
-.mushaf-section{
-    max-width:900px;
-    margin:0 auto;
-}
-.mushaf-toolbar{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-bottom:15px;
-}
-.mushaf-toolbar .utility-btn{
-    min-width:120px;
-}
-.mushaf-page-input{
-    width:90px;
-    box-sizing:border-box;
-    padding:11px;
-    border-radius:12px;
-    border:1px solid var(--border);
-    background:var(--bg2);
-    color:var(--text);
-    text-align:center;
-    font-size:16px;
-}
-.mushaf-frame{
-    width:100%;
-    box-sizing:border-box;
-    padding:10px;
-    border-radius:20px;
-    background:#111;
-    border:1px solid var(--border);
-    box-shadow:var(--shadow);
-    overflow:auto;
-    text-align:center;
-}
-.mushaf-page{
-    display:block;
-    width:min(100%,720px);
-    height:auto;
-    min-height:420px;
-    margin:0 auto;
-    border-radius:8px;
-    background:#fff;
-}
-.mushaf-status{
-    min-height:25px;
-    text-align:center;
-    color:var(--muted);
-    margin-top:10px;
-    line-height:1.8;
-}
-@media(max-width:600px){
-    .feature-modal{padding:7px;}
-    .feature-modal .modal-box{
-        max-height:96vh;
-        padding:15px 10px;
-        border-radius:20px;
-    }
-    .feature-modal-title{font-size:26px;margin-bottom:14px;}
-    .asma-modal-name{font-size:34px;}
-    .asma-modal-meaning{font-size:17px;}
-    .mushaf-frame{padding:5px;border-radius:15px;}
-    .mushaf-page{min-height:300px;}
-}
-
-/* ===== المشغل الاحترافي ===== */
-.audio-box{
-    display:none;
-    margin:0 auto 22px;
-    padding:0;
-    border-radius:24px;
-    overflow:hidden;
-    background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02)),var(--card);
-    border:1px solid rgba(215,187,121,.20);
-    box-shadow:0 18px 50px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.05);
-    text-align:right;
-}
-.audio-box.show{display:block;animation:playerIn .28s ease both}
-@keyframes playerIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.audio-top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 20px 12px;border-bottom:1px solid rgba(255,255,255,.06)}
-.audio-title-wrap{min-width:0}
-.audio-kicker{font-size:11px;color:var(--muted);margin-bottom:4px}
-.audio-title{font-family:"Amiri",serif;font-size:25px;color:var(--gold2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.audio-reciter{font-size:13px;color:var(--muted);margin-top:2px}
-.audio-badge{width:44px;height:44px;flex:0 0 44px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:rgba(215,187,121,.10);border:1px solid rgba(215,187,121,.18);font-size:22px}
-.audio-select-row{padding:12px 20px 4px}
-.reciter-select{width:100%;max-width:none;margin:0;padding:12px 14px;border-radius:13px;border:1px solid var(--border);background:var(--bg2);color:var(--text);outline:none;font-size:14px}
-.audio-progress-wrap{padding:14px 20px 2px}
-.audio-progress{width:100%;height:5px;appearance:none;-webkit-appearance:none;border-radius:99px;background:rgba(255,255,255,.12);outline:none;cursor:pointer}
-.audio-progress::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--gold);border:3px solid var(--card);box-shadow:0 0 0 1px rgba(215,187,121,.35)}
-.audio-progress::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:var(--gold);border:3px solid var(--card)}
-.audio-times{display:flex;direction:ltr;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:7px}
-.audio-controls{display:flex;align-items:center;justify-content:center;gap:10px;padding:13px 18px 16px}
-.audio-control{border:1px solid var(--border);background:rgba(255,255,255,.045);color:var(--text);width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s;font-size:17px}
-.audio-control:hover{transform:translateY(-2px);border-color:var(--gold);background:rgba(215,187,121,.09)}
-.audio-control.main{width:58px;height:58px;background:linear-gradient(145deg,var(--green2),var(--green));border-color:rgba(255,255,255,.10);color:#fff;font-size:24px;box-shadow:0 8px 22px rgba(0,0,0,.22)}
-.audio-control.main:hover{background:linear-gradient(145deg,var(--green),var(--green2))}
-.audio-control.active{border-color:var(--gold);color:var(--gold2);background:rgba(215,187,121,.10)}
-.audio-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 20px 17px}
-.audio-mini-actions{display:flex;gap:7px;align-items:center}
-.audio-mini{height:34px;padding:0 10px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.035);color:var(--muted);font-size:12px;cursor:pointer}
-.audio-mini:hover{color:var(--text);border-color:var(--gold)}
-.audio-volume{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:15px;direction:ltr}
-.volume-range{width:80px;height:4px;appearance:none;-webkit-appearance:none;border-radius:99px;background:rgba(255,255,255,.12);cursor:pointer}
-.volume-range::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--gold)}
-.volume-range::-moz-range-thumb{width:10px;height:10px;border:0;border-radius:50%;background:var(--gold)}
-audio#audioPlayer{display:none}
-@media(max-width:600px){
-    .audio-box{border-radius:20px}
-    .audio-top{padding:15px 14px 10px}
-    .audio-title{font-size:22px}
-    .audio-badge{width:40px;height:40px;flex-basis:40px}
-    .audio-select-row,.audio-progress-wrap{padding-left:14px;padding-right:14px}
-    .audio-controls{gap:7px;padding-left:10px;padding-right:10px}
-    .audio-control{width:38px;height:38px;font-size:15px}
-    .audio-control.main{width:54px;height:54px;font-size:22px}
-    .audio-bottom{padding:0 14px 14px;flex-wrap:wrap}
-    .volume-range{width:65px}
-}
 
 
-/* مدير المحتوى دون إنترنت */
-.offline-heading{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
-.offline-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:var(--surface-2,#1d2933);font-size:25px;flex:0 0 48px}
-.offline-heading h3{margin:2px 0 6px;font-size:21px}
-.offline-heading p{margin:0;color:var(--muted);line-height:1.8}
-.offline-select-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
-.offline-select-grid label{font-weight:700;color:var(--text)}
-.offline-select-grid select{margin-top:8px}
-.offline-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.offline-note{margin-top:14px;padding:12px 14px;border-radius:12px;background:rgba(255,190,70,.08);border:1px solid rgba(255,190,70,.18);color:var(--muted);line-height:1.8;font-size:13px}
-.offline-library{margin-top:16px;display:grid;gap:8px}
-.offline-file-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 13px;border:1px solid var(--border);border-radius:13px;background:rgba(255,255,255,.025)}
-.offline-file-info{min-width:0}.offline-file-info strong{display:block}.offline-file-info span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
-.offline-badge{font-size:12px;padding:5px 8px;border-radius:9px;background:rgba(70,190,130,.12);color:#7ee2ae;white-space:nowrap}
-@media(max-width:650px){.offline-select-grid,.offline-actions{grid-template-columns:1fr}.offline-heading h3{font-size:18px}}
-
-
-
-/* نظام التسميع التفاعلي */
-.tasmiya-hero{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;padding-bottom:16px}
-.tasmiya-hero h3{margin:0 0 6px;font-size:22px}.tasmiya-hero p{margin:0;color:var(--muted);line-height:1.9;font-size:13px}
-.tasmiya-status{padding:9px 12px;border-radius:12px;background:rgba(70,190,130,.1);border:1px solid rgba(70,190,130,.2);white-space:nowrap;font-size:12px}
-.tasmiya-controls{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0 14px}
-.tasmiya-controls label{font-size:13px;color:var(--muted)}
-.tasmiya-page{min-height:360px;margin-top:14px;padding:28px 18px;border:1px solid var(--border);border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015));font-family:serif;line-height:2.35;text-align:right;direction:rtl;font-size:25px;position:relative}
-.tasmiya-page .empty-hint{height:290px;display:grid;place-items:center;text-align:center;color:var(--muted);font-family:inherit;font-size:18px;line-height:2}
-.tasmiya-ayah{padding:13px 4px;border-bottom:1px solid rgba(255,255,255,.06)}
-.tasmiya-word{display:inline-block;margin:0 3px 6px;padding:2px 3px;border-radius:7px;transition:.2s}
-.tasmiya-word.correct{color:var(--text);background:rgba(70,190,130,.10)}
-.tasmiya-word.current{border-bottom:2px solid var(--accent);color:var(--accent)}
-.tasmiya-word.error{color:#ff9b9b;background:rgba(220,70,70,.10);text-decoration:line-through}
-.tasmiya-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
-.tasmiya-stat{padding:11px;border:1px solid var(--border);border-radius:13px;text-align:center}.tasmiya-stat b{display:block;font-size:19px}.tasmiya-stat span{font-size:11px;color:var(--muted)}.tasmiya-mistakes{margin-top:12px;padding:13px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.025)}.tasmiya-mistakes h4{margin:0 0 8px}.tasmiya-mistake{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:12px}.tasmiya-mistake:last-child{border-bottom:0}.tasmiya-heard{color:#ff9b9b}.tasmiya-right{color:#7fe0aa}.tasmiya-session{margin-top:10px;font-size:12px;color:var(--muted)}
-.tasmiya-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px}.tasmiya-actions button{border:0;border-radius:12px;padding:11px;font:inherit;cursor:pointer;background:var(--card2);color:var(--text)}.tasmiya-actions .start{background:var(--accent);color:#111}
-.tasmiya-feedback{margin-top:12px;padding:12px 14px;border-radius:13px;background:rgba(255,255,255,.03);border:1px solid var(--border);line-height:1.9;font-size:13px;color:var(--muted);min-height:22px}
-.tasmiya-warning{margin-top:12px;padding:12px 14px;border-radius:13px;background:rgba(255,180,50,.08);border:1px solid rgba(255,180,50,.18);color:var(--muted);line-height:1.9;font-size:12px}
-
-.readwith-card{margin-top:12px;padding:18px;border:1px solid var(--border);border-radius:20px;background:linear-gradient(135deg,rgba(255,255,255,.045),rgba(255,255,255,.015))}
-.readwith-hero{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.readwith-hero h3{margin:0 0 6px;font-size:22px}.readwith-hero p{margin:0;color:var(--muted);line-height:1.9;font-size:13px}.readwith-status{padding:8px 11px;border-radius:12px;background:rgba(70,190,130,.1);border:1px solid rgba(70,190,130,.2);white-space:nowrap;font-size:12px}
-.readwith-controls{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.readwith-controls label{font-size:13px;color:var(--muted)}
-.readwith-stage{margin-top:14px;padding:24px 18px;border:1px solid var(--border);border-radius:18px;text-align:center;background:rgba(255,255,255,.025)}.readwith-stage .chunk{font-family:serif;font-size:28px;line-height:2.15;min-height:90px}.readwith-stage .hint{color:var(--muted);font-size:13px;line-height:1.9}.readwith-stage .phase{margin-bottom:8px;font-size:12px;color:var(--accent)}
-.readwith-progress{height:7px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;margin:15px 0}.readwith-progress span{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
-.readwith-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px}.readwith-actions button{border:0;border-radius:12px;padding:11px;font:inherit;cursor:pointer;background:var(--card2);color:var(--text)}.readwith-actions .primary{background:var(--accent);color:#111}
-.readwith-feedback{margin-top:11px;padding:11px 13px;border-radius:13px;border:1px solid var(--border);color:var(--muted);font-size:13px;line-height:1.9;min-height:22px}.readwith-warning{margin-top:10px;padding:11px 13px;border-radius:13px;background:rgba(255,180,50,.08);border:1px solid rgba(255,180,50,.18);color:var(--muted);font-size:12px;line-height:1.9}
-@media(max-width:650px){.readwith-controls,.readwith-actions{grid-template-columns:1fr}.readwith-hero{flex-direction:column}.readwith-stage .chunk{font-size:24px}}
-@media(max-width:650px){.tasmiya-controls,.tasmiya-meta,.tasmiya-actions{grid-template-columns:1fr}.tasmiya-hero{flex-direction:column}.tasmiya-page{min-height:300px;font-size:22px}.tasmiya-page .empty-hint{height:230px;font-size:16px}}
-
-/* نظام الحفظ المتقدم */
-.hifz-pro-card{overflow:hidden}
-.hifz-hero{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;padding:2px 0 18px}
-.hifz-kicker{display:inline-block;font-size:12px;color:var(--accent);margin-bottom:5px}
-.hifz-hero h3{margin:0 0 6px;font-size:22px}.hifz-hero p{margin:0;color:var(--muted);line-height:1.8;font-size:13px}
-.hifz-streak{white-space:nowrap;padding:9px 11px;border-radius:13px;background:rgba(255,170,60,.1);border:1px solid rgba(255,170,60,.18)}
-.hifz-settings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:5px 0 14px}
-.hifz-settings-grid label{font-size:13px;color:var(--muted)}
-.hifz-dashboard{margin-top:15px}
-.hifz-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
-.hifz-stat{padding:12px;border:1px solid var(--border);border-radius:14px;text-align:center;background:rgba(255,255,255,.025)}
-.hifz-stat b{display:block;font-size:20px}.hifz-stat span{display:block;color:var(--muted);font-size:11px;margin-top:4px}
-.hifz-task{margin-top:12px;padding:14px;border:1px solid var(--border);border-radius:15px;background:rgba(255,255,255,.025)}
-.hifz-task h4{margin:0 0 8px}.hifz-task p{color:var(--muted);font-size:13px;line-height:1.8;margin:5px 0}
-.hifz-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.hifz-actions button{border:0;border-radius:11px;padding:10px;font:inherit;cursor:pointer;background:var(--card2);color:var(--text)}
-.hifz-actions .done{background:var(--accent);color:#111}
-.hifz-review-list{display:grid;gap:7px;margin-top:10px}
-.hifz-review{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px;border-radius:12px;border:1px solid var(--border)}
-.hifz-review button{border:0;border-radius:9px;padding:7px 10px;background:var(--accent);color:#111;font:inherit}
-.hifz-note{font-size:12px;color:var(--muted);line-height:1.8;margin-top:10px}
-@media(max-width:650px){.hifz-settings-grid,.hifz-summary{grid-template-columns:1fr}.hifz-hero{flex-direction:column}.hifz-streak{align-self:flex-start}}
-
-/* مساعد الإيمان الذكي */
-.header-help-btn{position:relative}
-.help-pulse{position:absolute;top:6px;left:7px;width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(215,187,121,.5);animation:helpPulse 2s infinite}
-@keyframes helpPulse{0%{box-shadow:0 0 0 0 rgba(215,187,121,.45)}70%{box-shadow:0 0 0 7px rgba(215,187,121,0)}100%{box-shadow:0 0 0 0 rgba(215,187,121,0)}}
-.smart-help-overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);z-index:3000;display:none;padding:14px;overflow:auto}
-.smart-help-overlay.open{display:flex;align-items:flex-start;justify-content:center}
-.smart-help-sheet{width:min(760px,100%);margin:4vh auto 0;background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02)),var(--card);border:1px solid var(--border);border-radius:26px;box-shadow:0 25px 80px rgba(0,0,0,.45);overflow:hidden}
-.smart-help-head{padding:20px 20px 15px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(215,187,121,.12),transparent 65%);display:flex;gap:12px;align-items:center}
-.smart-help-avatar{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;background:rgba(215,187,121,.14);font-size:27px;flex:none}
-.smart-help-head-main{flex:1}.smart-help-head-main h3{margin:0;color:var(--gold2);font-size:21px}.smart-help-head-main p{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.7}
-.smart-help-close{border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:12px;width:40px;height:40px;font-size:24px;cursor:pointer}
-.smart-help-body{padding:16px}.smart-help-search{display:flex;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:7px}.smart-help-search input{flex:1;border:0;outline:0;background:transparent;color:var(--text);font:inherit;padding:10px}.smart-help-search button{border:0;border-radius:11px;background:var(--gold);color:#17120a;font-weight:bold;padding:0 15px;cursor:pointer}
-.smart-help-status{font-size:12px;color:var(--muted);margin:10px 2px}.smart-help-suggestions{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 14px}.help-chip{border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:999px;padding:8px 11px;cursor:pointer;font:inherit;font-size:12px}.help-chip:hover{border-color:var(--gold)}
-.smart-help-results{display:grid;gap:9px}.help-result{border:1px solid var(--border);background:rgba(255,255,255,.025);border-radius:16px;padding:13px;text-align:right}.help-result h4{margin:0 0 5px;color:var(--gold2);font-size:15px}.help-result p{margin:0;color:var(--muted);font-size:12px;line-height:1.8}.help-result button{margin-top:9px;border:1px solid var(--gold);background:rgba(215,187,121,.08);color:var(--gold2);border-radius:10px;padding:7px 11px;cursor:pointer;font:inherit;font-size:12px}.help-empty{text-align:center;padding:25px;color:var(--muted);border:1px dashed var(--border);border-radius:16px}.help-section-title{font-size:13px;color:var(--gold2);margin:14px 2px 7px;font-weight:bold}
-@media(max-width:600px){.smart-help-overlay{padding:8px}.smart-help-sheet{margin:1vh auto 0;border-radius:22px}.smart-help-head{padding:15px}.smart-help-body{padding:12px}.smart-help-search button{padding:0 12px}.smart-help-head-main h3{font-size:18px}}
-
-/* V18: وضع المصحف الكامل */
-body.mushaf-only{
-    overflow:hidden !important;
-    background:#000 !important;
-}
-body.mushaf-only header,
-body.mushaf-only #hero,
-body.mushaf-only .section:not(#mushaf),
-body.mushaf-only #mushaf > h2,
-body.mushaf-only #mushaf .section-title,
-body.mushaf-only #mushaf .mushaf-toolbar,
-body.mushaf-only #mushaf .mushaf-status{
-    display:none !important;
-}
-body.mushaf-only #mushaf{
-    position:fixed !important;
-    inset:0 !important;
-    z-index:2147483000 !important;
-    display:block !important;
-    width:100vw !important;
-    height:100dvh !important;
-    margin:0 !important;
-    padding:0 !important;
-    background:#000 !important;
-}
-body.mushaf-only #mushaf .content-card,
-body.mushaf-only #mushaf .mushaf-section{
-    position:absolute !important;
-    inset:0 !important;
-    width:100% !important;
-    height:100% !important;
-    max-width:none !important;
-    margin:0 !important;
-    padding:0 !important;
-    border:0 !important;
-    border-radius:0 !important;
-    background:#000 !important;
-    box-shadow:none !important;
-}
-body.mushaf-only .mushaf-frame{
-    position:absolute !important;
-    inset:0 !important;
-    width:100% !important;
-    height:100% !important;
-    overflow:hidden !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    background:#000 !important;
-    touch-action:pan-y !important;
-}
-body.mushaf-only .mushaf-page{
-    display:block !important;
-    width:100% !important;
-    height:100% !important;
-    max-width:100% !important;
-    max-height:100% !important;
-    object-fit:contain !important;
-    margin:0 !important;
-    padding:0 !important;
-    user-select:none !important;
-    -webkit-user-select:none !important;
-    -webkit-touch-callout:none !important;
-    touch-action:pan-y !important;
-}
 </style>
 </head>
 
@@ -1324,28 +975,48 @@ body.mushaf-only .mushaf-page{
 
 <section class="section home-menu" id="home-menu">
 
-    <div class="smart-home-head">
-        <div class="welcome">
-            <h2>لوحة التحكم الذكية</h2>
-            <p>جميع الميزات أمامك دائمًا، مع ترتيب ذكي يبرز ما يناسب وقتك واستخدامك.</p>
-        </div>
-        <button class="all-features-btn" onclick="openFeatureHub()">☷ كل الميزات</button>
-    </div>
+    <h2 class="section-title">اختر ما تريد</h2>
 
-    <div class="smart-insight" id="smartInsight">
-        <div class="insight-icon" id="smartInsightIcon">✨</div>
-        <div class="insight-body"><b id="smartInsightTitle">اقتراح لك اليوم</b><span id="smartInsightText">استكشف ما يناسب وقتك وتقدمك.</span></div>
-        <button id="smartInsightAction" onclick="runSmartInsight()">ابدأ</button>
-    </div>
-
-    <div class="smart-continue" id="smartContinue" onclick="continueReading()">
-        <div class="sc-main"><span class="sc-icon">📌</span><div><b id="smartContinueTitle">متابعة القراءة</b><span id="smartContinueText">العودة إلى آخر موضع وصلت إليه</span></div></div>
-        <span class="sc-arrow">‹</span>
-    </div>
-
-    <div class="quick-label">⚡ الوصول السريع</div>
-    <div class="menu-grid smart-all-cards" id="smartQuickGrid" aria-label="جميع ميزات التطبيق">
-        <!-- تُبنى جميع البطاقات هنا تلقائيًا، مع إبراز المقترح فقط دون إخفاء أي بطاقة. -->
+    <div class="menu-grid" id="quickGrid" aria-label="جميع ميزات التطبيق">
+        <button class="menu-card" onclick="trackFeature('reading');openReadingHome()">
+            <span class="emoji">📖</span><h3>قراءة القرآن الكريم</h3><p>قراءة سور القرآن الكريم بالخط العثماني</p>
+        </button>
+        <button class="menu-card" onclick="trackFeature('listening');showSection('listening')">
+            <span class="emoji">🎧</span><h3>الاستماع إلى القرآن الكريم</h3><p>استمع إلى التلاوة بصوت عدد من القراء</p>
+        </button>
+        <button class="menu-card" onclick="trackFeature('search');showSection('search')">
+            <span class="emoji">🔎</span><h3>البحث في القرآن الكريم</h3><p>ابحث عن السورة أو الآية التي تريدها</p>
+        </button>
+        <button class="menu-card" onclick="trackFeature('hifz');showSection('hifz')">
+            <span class="emoji">🧠</span><h3>حفظ القرآن</h3><p>خطة الحفظ ومتابعة مستوى التقدم</p>
+        </button>
+        <button class="menu-card" onclick="trackFeature('tasmiya');openTasmiyaHome()">
+            <span class="emoji">🎙️</span><h3>التسميع</h3><p>اختبر حفظك بصوتك بطريقة تفاعلية</p>
+        </button>
+        <button class="menu-card" onclick="trackFeature('readwith');openReadWithUs()">
+            <span class="emoji">📣</span><h3>اقرأ معنا</h3><p>تعلم القراءة بالترديد التدريجي</p>
+        </button>
+        <button class="menu-card" onclick="trackFeature('adhkar');showSection('adhkar')">
+            <span class="emoji">🤲</span><h3>الأذكار</h3><p>أذكار الصباح والمساء</p>
+        </button>
+        <button class="menu-card" onclick="trackFeature('asma');showSection('asma')">
+            <span class="emoji">🕋</span><h3>أسماء الله الحسنى</h3><p>99 اسمًا ومعانيها</p>
+        </button>
+        <button class="menu-card" onclick="trackFeature('khatma');showSection('khatma')">
+            <span class="emoji">📅</span><h3>خطة الختمة</h3><p>حدد المدة واحصل على وردك اليومي</p>
+        </button>
+        <button class="menu-card" onclick="trackFeature('prayer');openPrayerTimes()">
+            <span class="emoji">🕰️</span><h3>مواعيد الصلاة</h3><p>أوقات الصلاة حسب موقعك</p>
+        </button>
+        <button class="menu-card" onclick="trackFeature('qibla');openQibla()">
+            <span class="emoji">🧭</span><h3>بوصلة القبلة</h3><p>اعرف اتجاه القبلة</p>
+        </button>
+        <button class="menu-card" onclick="trackFeature('offline');showOfflineManager()">
+            <span class="emoji">📥</span><h3>دون إنترنت</h3><p>إدارة المحتوى المحفوظ للاستخدام دون اتصال</p>
+        </button>
+        <button class="menu-card" onclick="trackFeature('favorites');showFavorites()">
+            <span class="emoji">⭐</span><h3>الآيات المحفوظة</h3><p>الوصول إلى الآيات التي حفظتها</p>
+        </button>
     </div>
 
     <div class="utility-row">
@@ -1367,7 +1038,6 @@ body.mushaf-only .mushaf-page{
         </div>
         <div class="feature-all-grid" id="featureAllGrid">
             <button class="menu-card" data-cat="quran" onclick="closeFeatureHub();trackFeature('reading');openReadingHome()"><span class="emoji">📖</span><h3>قراءة القرآن الكريم</h3><p>قراءة سور القرآن الكريم بالخط العثماني</p></button>
-            <button class="menu-card" data-cat="quran" onclick="closeFeatureHub();trackFeature('mushaf');openMushaf()"><span class="emoji">🕌</span><h3>المصحف</h3><p>604 صفحة</p></button>
             <button class="menu-card" data-cat="quran" onclick="closeFeatureHub();trackFeature('listening');showSection('listening')"><span class="emoji">🎧</span><h3>الاستماع</h3><p>التلاوات</p></button>
             <button class="menu-card" data-cat="quran" onclick="closeFeatureHub();trackFeature('search');showSection('search')"><span class="emoji">🔎</span><h3>البحث</h3><p>ابحث في القرآن</p></button>
             <button class="menu-card" data-cat="quran" onclick="closeFeatureHub();trackFeature('hifz');showSection('hifz')"><span class="emoji">🧠</span><h3>حفظ القرآن</h3><p>خطة الحفظ</p></button>
@@ -1449,13 +1119,6 @@ body.mushaf-only .mushaf-page{
 
 </section>
 
-<section class="section" id="mushaf">
-  <div class="content-card mushaf-section">
-    <div class="mushaf-frame">
-      <img id="mushafPageImage" class="mushaf-page" alt="صفحة المصحف" decoding="async" draggable="false">
-    </div>
-  </div>
-</section>
 <section class="section prayer-section" id="prayer">
 <h2 class="section-title">🕰️ مواعيد الصلاة</h2>
 <div class="prayer-panel">
@@ -1780,7 +1443,7 @@ body.mushaf-only .mushaf-page{
     <div class="exit-prayer-icon">🤲</div>
     <div class="exit-prayer-title" id="exitPrayerTitle">قبل أن تغادر</div>
     <p class="exit-prayer-text">نسأل الله أن يكتب لك الأجر في كل آية قرأتها وكل ذكر قلته في هذا التطبيق.</p>
-    <div class="exit-prayer-dua">لا تنسَ الدعاء لوالديّ، جزاك الله خيرًا 🤍<br><span style="font-size:18px">اللهم اغفر لهما وارحمهما وتقبّل هذا العمل صدقةً عنهما</span></div>
+    <div class="exit-prayer-dua">لا تنسَ الدعاء لوالديّ، جزاك الله خيرًا 🤍</div>
     <div class="exit-prayer-actions">
       <button type="button" onclick="cancelExitPrayer()">البقاء في التطبيق</button>
       <button type="button" class="exit-confirm" onclick="confirmExitPrayer()">الخروج</button>
@@ -1964,7 +1627,6 @@ document.addEventListener("DOMContentLoaded",function(){
         currentReciter;
 
     updateContinueBox();
-    updateSmartHome();
 
 
     const base =
@@ -2016,12 +1678,6 @@ document.addEventListener("DOMContentLoaded",function(){
     });
 
     window.addEventListener("popstate",function(){
-
-        if(currentSection === "mushaf"){
-            document.body.classList.remove("mushaf-only");
-            try{if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(()=>{});}catch(e){}
-        }
-
         if(allowLeave){
             return;
         }
@@ -2166,7 +1822,6 @@ const SMART_HELP_DATA=[
  {keys:['استماع','صوت','قارئ','تلاوة'],title:'الاستماع إلى القرآن',text:'اختر القارئ والسورة، ثم استخدم المشغل للتشغيل والتقديم والتأخير والسرعة والتنزيل عند توفره.',action:"trackFeature('listening');showSection('listening')",button:'فتح الاستماع'},
  {keys:['أذكار','ذكر','الصباح','المساء','النوم'],title:'الأذكار',text:'يمكنك فتح أذكار الصباح أو المساء أو النوم من قسم الأذكار، وسيقترح التطبيق ما يناسب وقت اليوم.',action:"trackFeature('adhkar');showSection('adhkar')",button:'فتح الأذكار'},
  {keys:['ختمة','الختمة','ورد','خطة ختمة'],title:'خطة الختمة',text:'حدد هدف الختمة والورد اليومي، وسيعرض لك التطبيق تقدمك ويساعدك على متابعة ما تبقى.',action:"trackFeature('khatma');showSection('khatma')",button:'فتح الختمة'},
- {keys:['مصحف','604','صفحة'],title:'المصحف',text:'تصفح مصحف المدينة صفحة بصفحة، مع حفظ آخر صفحة وصلت إليها.',action:"trackFeature('mushaf');openMushaf()",button:'فتح المصحف'},
  {keys:['مفضلة','محفوظة','حفظ آية','نجمة'],title:'الآيات المحفوظة',text:'من نافذة الآية اضغط «حفظ الآية» لإضافتها إلى المفضلة، ثم افتح هذا القسم للعودة إليها.',action:'showFavorites()',button:'فتح المحفوظة'},
  {keys:['بدون إنترنت','دون إنترنت','أوفلاين','انترنت','الإنترنت'],title:'استخدام التطبيق دون إنترنت',text:'من إدارة المحتوى دون إنترنت يمكنك حفظ نص القرآن والتلاوات المتاحة على جهازك لاستخدامها لاحقًا.',action:'showOfflineManager()',button:'فتح المحتوى دون إنترنت'},
  {keys:['تثبيت','ثبت','تطبيق','الشاشة الرئيسية'],title:'تثبيت التطبيق',text:'إذا ظهر زر التثبيت في أعلى التطبيق، اضغطه لإضافة التطبيق إلى الشاشة الرئيسية. في بعض المتصفحات يظهر خيار التثبيت من قائمة المتصفح.',action:"document.getElementById('installBtn')?.click()",button:'محاولة التثبيت'},
@@ -2311,86 +1966,7 @@ function trackFeature(key){
         usage._last=key;
         localStorage.setItem('featureUsage',JSON.stringify(usage));
     }catch(e){}
-    setTimeout(updateSmartHome,20);
 }
-
-function updateSmartHome(){
-    const btn=document.getElementById('continueBtn');
-    const smart=document.getElementById('smartContinue');
-    if(btn && smart && btn.style.display!=='none') smart.classList.add('show');
-    const usage=JSON.parse(localStorage.getItem('featureUsage')||'{}');
-    const grid=document.getElementById('smartQuickGrid');
-    if(!grid)return;
-
-    const hour=new Date().getHours();
-    const hasProgress=!!localStorage.getItem('lastReading');
-    const hifz=JSON.parse(localStorage.getItem('hifzPlan')||'null');
-    const items={
-      reading:{icon:'📖',title:'قراءة القرآن',text:'تابع القراءة أو اختر سورة',action:"openReadingHome()",key:'reading'},
-      mushaf:{icon:'🕌',title:'المصحف',text:'تصفح مصحف المدينة',action:'openMushaf()',key:'mushaf'},
-      listening:{icon:'🎧',title:'الاستماع',text:'استمع إلى تلاوة هادئة',action:"showSection('listening')",key:'listening'},
-      hifz:{icon:'🧠',title:'حفظ القرآن',text:'تابع خطة الحفظ والمراجعة',action:"showSection('hifz')",key:'hifz'},
-      tasmiya:{icon:'🎙️',title:'التسميع',text:'اختبر حفظك بصوتك',action:'openTasmiyaHome()',key:'tasmiya'},
-      readwith:{icon:'📣',title:'اقرأ معنا',text:'تعلم القراءة بالترديد التدريجي',action:'openReadWithUs()',key:'readwith'},
-      search:{icon:'🔎',title:'البحث',text:'ابحث في القرآن',action:"showSection('search')",key:'search'},
-      adhkar:{icon:'🤲',title:'الأذكار',text:'أذكار تناسب وقت اليوم',action:"showSection('adhkar')",key:'adhkar'},
-      prayer:{icon:'🕰️',title:'مواعيد الصلاة',text:'أوقات الصلاة حسب بلدك',action:'openPrayerTimes()',key:'prayer'},
-      qibla:{icon:'🧭',title:'بوصلة القبلة',text:'اعرف اتجاه القبلة',action:'openQibla()',key:'qibla'},
-      khatma:{icon:'📅',title:'خطة الختمة',text:'راجع وردك اليومي',action:"showSection('khatma')",key:'khatma'},
-      asma:{icon:'🕋',title:'أسماء الله الحسنى',text:'99 اسمًا ومعانيها',action:"showSection('asma')",key:'asma'},
-      offline:{icon:'📥',title:'دون إنترنت',text:'إدارة المحتوى المحفوظ',action:'showOfflineManager()',key:'offline'},
-      favorites:{icon:'⭐',title:'الآيات المحفوظة',text:'ارجع إلى آياتك المفضلة',action:'showFavorites()',key:'favorites'}
-    };
-    const candidates=['reading','mushaf','listening','search','hifz','tasmiya','readwith','adhkar','asma','khatma','prayer','qibla','offline','favorites'];
-
-    // الذكاء هنا لا يحذف أي بطاقة: يغيّر ترتيبها فقط ويحدد البطاقة الأنسب حاليًا.
-    const context=[];
-    if(hour>=4 && hour<11) context.push('adhkar');
-    if(hour>=17 && hour<23) context.push('adhkar');
-    if(hasProgress) context.unshift('reading');
-    if(hifz){ context.push('hifz'); context.push('tasmiya'); }
-    context.push('listening');
-
-    const score=(key)=>{
-      const ci=context.indexOf(key);
-      const contextScore=ci>=0 ? Math.max(0,40-ci*5) : 0;
-      const usageScore=Number(usage[key]||0)*3;
-      return contextScore+usageScore;
-    };
-    const ranked=[...candidates].sort((a,b)=>score(b)-score(a));
-    const recommended=ranked[0];
-
-    grid.innerHTML='';
-    ranked.forEach((key,i)=>{
-      const item=items[key];
-      const card=document.createElement('button');
-      card.type='button';
-      card.className='menu-card'+(i<3?' smart-primary':'')+(key===recommended?' smart-recommended':'');
-      card.dataset.feature=item.key;
-      card.onclick=()=>{trackFeature(item.key);try{eval(item.action)}catch(e){}};
-      card.innerHTML='<span class="emoji">'+item.icon+'</span><h3>'+item.title+'</h3><p>'+item.text+'</p>'+
-        (key===recommended?'<span class="smart-card-badge">مقترح الآن</span>':'')+
-        '<span class="smart-card-arrow">فتح ‹</span>';
-      grid.appendChild(card);
-    });
-    updateSmartInsight(hour,hasProgress,hifz,usage);
-}
-
-function updateSmartInsight(hour,hasProgress,hifz,usage){
-  const data=hour>=4&&hour<12
-    ?{icon:'🌅',title:'وقت مناسب لأذكار الصباح',text:'ابدأ يومك بذكر الله ثم واصل وردك.',action:"showSection('adhkar')"}
-    :hour>=17&&hour<23
-    ?{icon:'🌙',title:'أذكار المساء',text:'يمكنك فتح أذكار المساء الآن بسهولة.',action:"showSection('adhkar')"}
-    :hasProgress
-    ?{icon:'📖',title:'لديك قراءة محفوظة',text:'يمكنك العودة مباشرة إلى آخر موضع وصلت إليه.',action:'continueReading()'}
-    :hifz
-    ?{icon:'🧠',title:'تابع خطة الحفظ',text:'راجع ما حفظته ثم استخدم التسميع للتأكد.',action:"showSection('hifz')"}
-    :{icon:'✨',title:'اقتراح لك اليوم',text:'ابدأ بقراءة القرآن أو استمع إلى تلاوة.',action:'openReadingHome()'};
-  const a=document.getElementById('smartInsightIcon'),b=document.getElementById('smartInsightTitle'),c=document.getElementById('smartInsightText'),d=document.getElementById('smartInsightAction');
-  if(a)a.textContent=data.icon;if(b)b.textContent=data.title;if(c)c.textContent=data.text;if(d){d.textContent='فتح';d.onclick=()=>{try{eval(data.action)}catch(e){}};}
-  window._smartInsight=data;
-}
-function runSmartInsight(){const x=window._smartInsight;if(x)try{eval(x.action)}catch(e){}}
 
 function openFeatureHub(){
     const m=document.getElementById('featureModal');
@@ -2413,7 +1989,6 @@ function renderSection(id){
 
     currentSection = id;
 
-    document.body.classList.toggle("mushaf-only", id === "mushaf");
 
     if(id === "readwith") setTimeout(function(){populateReadWithSurahs();updateReadWithUI();},20);
     if(id === "asma") setTimeout(renderAsma,20);
@@ -2445,7 +2020,6 @@ function renderSection(id){
 
     if(id === "home-menu"){
         updateContinueBox();
-        updateSmartHome();
     }
 
     window.scrollTo({
@@ -2584,7 +2158,7 @@ function renderQuranSearchResults(results,query){
     box.innerHTML=results.map((r,i)=>`<button type="button" class="quran-result" onclick="openSearchAyah(${r.surah},${r.ayah})">
         <div class="quran-result-head"><span>سورة ${escapeSearchHtml(r.name)}</span><b>آية ${r.ayah}</b><span class="result-index">${i+1}</span></div>
         <div class="quran-result-text">${highlightQuranSearch(r.text,query)}</div>
-        <div class="quran-result-open">فتح الآية في المصحف ←</div>
+        <div class="quran-result-open">فتح الآية في القراءة ←</div>
     </button>`).join('');
 }
 
@@ -2780,30 +2354,14 @@ async function openSurah(
 
     try{
 
-        const response =
-            await fetch(
-                "https://api.alquran.cloud/v1/surah/"
-                + number
-                + "/quran-uthmani"
-            );
+        /* استخدم المصدر المحلي أولًا ثم الشبكة؛ هذا يمنع تعطل اختيار السورة */
+        const surahData = await getLocalOrRemoteSurah(number);
 
-        if(!response.ok){
-            throw new Error("QURAN_API_ERROR");
-        }
-
-        const result =
-            await response.json();
-
-        if(
-            result.code !== 200 ||
-            !result.data ||
-            !result.data.ayahs
-        ){
+        if(!surahData || !Array.isArray(surahData.ayahs)){
             throw new Error("QURAN_EMPTY");
         }
 
-        const ayahs =
-            result.data.ayahs;
+        const ayahs = surahData.ayahs;
 
         ayahList.innerHTML = "";
 
@@ -3633,7 +3191,7 @@ function hifzDueReviews(p){
     });
     return out.sort((a,b)=>a-b);
 }
-function openHifzPage(page){openMushaf();renderMushafPage(page);}
+function openHifzPage(page){showSection('reading');setTimeout(function(){showToast('افتح السورة المطلوبة من قسم قراءة القرآن الكريم لمتابعة الحفظ.');},80);}
 function renderHifz(){
     const b=document.getElementById("hifzProgress"), p=hifzLoad(); if(!b)return;
     const streak=document.getElementById("hifzStreak");
@@ -3661,71 +3219,11 @@ function renderHifz(){
     }else{
         html+="<div class='hifz-task'><h4>أتممت ورد اليوم 🌟</h4><p>يمكنك مراجعة الصفحات المحفوظة أو الاستمرار غدًا.</p></div>";
     }
-    html+="<div class='hifz-note'>نظام المراجعة المقترح: بعد إتقان الصفحة تُراجع بعد 1 ثم 3 ثم 7 ثم 14 ثم 30 يومًا. يمكنك فتح صفحة المصحف مباشرة من كل مهمة.</div>";
+    html+="<div class='hifz-note'>نظام المراجعة المقترح: بعد إتقان الصفحة تُراجع بعد 1 ثم 3 ثم 7 ثم 14 ثم 30 يومًا. يمكنك فتح السورة من قسم قراءة القرآن مباشرة من كل مهمة.</div>";
     b.innerHTML=html;
 }
 function createKhatmaPlan(){let d=Number(document.getElementById("khatmaDays").value)||30,pg=Math.ceil(604/d);localStorage.setItem("khatmaPlan",JSON.stringify({days:d,pages:pg}));document.getElementById("khatmaResult").innerHTML="<b>وردك اليومي</b><p>حوالي <strong>"+pg+" صفحات</strong> يوميًا لإتمام 604 صفحات خلال "+d+" يومًا.</p>"}
 
-const MUSHAF_TOTAL_PAGES=604;
-let mushafPage=Number(localStorage.getItem("mushafPage")||1);
-
-
-function openMushaf(){
-    closeFeatureHub?.();
-    currentSection="mushaf";
-    sectionHistory.push("mushaf");
-    history.pushState({section:"mushaf",app:true},"","#mushaf");
-    document.body.classList.add("mushaf-only");
-    renderSection("mushaf");
-    renderMushafPage(mushafPage);
-    try{
-        if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(()=>{});
-    }catch(e){}
-}
-function closeMushaf(){
-    document.body.classList.remove("mushaf-only");
-    try{
-        if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(()=>{});
-    }catch(e){}
-    if(currentSection==="mushaf"){
-        if(sectionHistory.length>1) sectionHistory.pop();
-        const previous=sectionHistory[sectionHistory.length-1]||"home-menu";
-        currentSection=previous;
-        renderSection(previous);
-        history.replaceState({section:previous,app:true},"","#"+previous);
-    }
-}
-function renderMushafPage(page){
-    page=Math.max(1,Math.min(MUSHAF_TOTAL_PAGES,Number(page)||1));
-    mushafPage=page;
-    localStorage.setItem("mushafPage",String(page));
-    const image=document.getElementById("mushafPageImage");
-    if(!image)return;
-    image.src="https://api.islamic.app/v1/mushaf/page/"+page+".svg?theme=dark&width=1200";
-}
-function changeMushafPage(step){renderMushafPage(mushafPage+step);}
-function goToMushafPage(){
-    const input=document.getElementById("mushafPageInput");
-    renderMushafPage(input?input.value:1);
-}
-function initMushafSwipe(){
-    const frame=document.querySelector(".mushaf-frame");
-    if(!frame || frame.dataset.swipeReady==="1")return;
-    frame.dataset.swipeReady="1";
-    let startX=0,startY=0;
-    frame.addEventListener("touchstart",function(e){
-        if(!e.touches||!e.touches[0])return;
-        startX=e.touches[0].clientX; startY=e.touches[0].clientY;
-    },{passive:true});
-    frame.addEventListener("touchend",function(e){
-        if(!e.changedTouches||!e.changedTouches[0])return;
-        const dx=e.changedTouches[0].clientX-startX;
-        const dy=e.changedTouches[0].clientY-startY;
-        if(Math.abs(dx)<45 || Math.abs(dx)<Math.abs(dy)*1.2)return;
-        // في الواجهة العربية: السحب من اليمين إلى اليسار = الصفحة التالية
-        if(dx<0) changeMushafPage(1); else changeMushafPage(-1);
-    },{passive:true});
-}
 async function showOfflineManager(){
     showSectionDirect("offline");
     const q=document.getElementById("offlineQuranStatus");
