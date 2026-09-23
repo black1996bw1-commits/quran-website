@@ -1,4 +1,4 @@
-const CACHE_NAME = "al-iman-pwa-v1";
+const CACHE_NAME = 'al-iman-v18.1-verified';
 const APP_SHELL = [
   "./",
   "./index.html",
