@@ -2284,11 +2284,27 @@ function updateContinueBox(){
 }
 
 function saveLastReading(){
+    if(currentMode !== "reading" || !currentSurah) return;
     try{
-        localStorage.setItem("lastReading",JSON.stringify({surah:currentSurah,scroll:window.scrollY||0}));
+        localStorage.setItem("lastReading",JSON.stringify({
+            surah:Number(currentSurah),
+            scroll:Math.max(0,Math.round(window.scrollY||window.pageYOffset||0)),
+            savedAt:Date.now()
+        }));
     }catch(e){}
     updateContinueBox();
 }
+
+let saveReadingTimer=null;
+window.addEventListener("scroll",function(){
+    if(currentMode !== "reading" || !currentSurah) return;
+    clearTimeout(saveReadingTimer);
+    saveReadingTimer=setTimeout(saveLastReading,250);
+},{passive:true});
+
+window.addEventListener("pagehide",function(){
+    if(currentMode === "reading") saveLastReading();
+});
 function continueReading(){
     const x=JSON.parse(localStorage.getItem("lastReading")||"null");
     if(x&&Number(x.surah)>=1&&Number(x.surah)<=114){
@@ -2465,8 +2481,7 @@ async function openSurah(
 
         });
 
-        saveLastReading();
-
+        // لا تحفظ هنا: عند فتح السورة يكون scrollY غالبًا صفراً، وهذا كان يمسح موضع القراءة المحفوظ.
         setTimeout(function(){
 
             if(targetAyah){
@@ -2506,10 +2521,8 @@ async function openSurah(
                     Number.isFinite(saved.scroll)
                 ){
 
-                    window.scrollTo({
-                        top:saved.scroll,
-                        behavior:"instant"
-                    });
+                    const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+                    window.scrollTo(0, Math.min(Number(saved.scroll), maxScroll));
 
                 }else{
 
